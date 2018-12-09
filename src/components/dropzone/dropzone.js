@@ -5,7 +5,7 @@ import "./dropzone.css"
 
 
 //Semantic UI
-import {Button,Label} from "semantic-ui-react" 
+import {Button,Label,Segment} from "semantic-ui-react" 
 
 class Dropzone extends React.Component{
     constructor(props) {
@@ -20,7 +20,7 @@ class Dropzone extends React.Component{
     
       _handleSubmit(e) {
         e.preventDefault();
-        // TODO: do something with -> this.state.file
+        this.props.pictureSubmit(this.state.file)
       }
     
       _handleImageChange(e) {
@@ -47,7 +47,7 @@ class Dropzone extends React.Component{
         }
     
         return (
-          <div>
+          <Segment className="dropZone"> 
               <Label
                     as="label"
                     basic
@@ -65,7 +65,7 @@ class Dropzone extends React.Component{
                     <Button type="submit" onClick={this._handleSubmit}>Upload Image</Button>
                 </Label>    
             <div>{$imagePreview}</div>
-          </div>
+          </Segment>
         )
       }
     
