@@ -35,5 +35,10 @@ config.decisionTree=[{
     ]
 }]
 
+config.header={
+    title: "Lufthansa",
+    logo: "./images/logo.png"
+}
+
 
 export default config

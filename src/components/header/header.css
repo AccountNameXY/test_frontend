@@ -1,0 +1,25 @@
+.mainHeader{
+    width: 90em; 
+    height: 8em;
+    background-color: #001F52;
+    margin-left: auto; 
+    margin-right: auto;
+    
+}
+
+.title{
+    color: white; 
+    font-size: 50px;
+    font-weight: bold;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0.25em !important;
+    /* top: 50%;
+    transform: translateY(-50%) */
+}
+.mainLogo{
+    width: 5em; 
+    height: 2em;
+    color: white
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import{Grid,Segment,Header,Button} from "semantic-ui-react"
+import "./decisionTree.css"
 
 class DecisionTree extends Component{
     constructor(props){
@@ -47,8 +48,6 @@ class DecisionTree extends Component{
             stage2: e.target.value,
             finalTags: finalTags
         })
-
-
     }
 
 
@@ -79,33 +78,37 @@ class DecisionTree extends Component{
     render(){
   
         return(
-            <Grid stackable >
-                <Grid.Row >
-                    <Grid.Column computer={12} mobile={6} centered>
+            <Grid stackable centered>
+                <Grid.Row centered style={{marginTop:"5%"}}>
+                   
                         {this.hasData(this.props.data) ? 
                         this.props.data.map((item,itemKey) => {
-                            return (
-                                <Button value={item.name} onClick={this.handleEbene1}>{item.name}</Button>
+                            return ( 
+                                <Grid.Column computer={12} mobile={6} centered style={{marginLeft:"5%",marginTop:"5%"}}>
+                                    <Button clasName="tag" value={item.name} onClick={this.handleEbene1}>{item.name}</Button>
+                                </Grid.Column>
                             )
                         })
                         :null 
                         }
-                    </Grid.Column>
+                    
                 </Grid.Row>
-                <Grid.Row>
-                    <Grid.Column computer={12} mobile={6} centered>
+                <Grid.Row centered style={{marginTop:"5%"}}>
+                   
                         {console.log(this.state.stage)}
                         {this.state.stage > 1  ? 
                             this.state.nextContent.map((item,itemKey) => {
-                            return (
-                                    <Button value={item.name} onClick={this.handleEbene2}>{item.name}</Button>
+                            return ( 
+                            <Grid.Column computer={3} mobile={6} centered  style={{marginTop:"5%"}}>
+                                    <Button className="tag" value={item.name} onClick={this.handleEbene2}>{item.name}</Button>
+                            </Grid.Column>
                             )
                         })
                         :null 
                         }
-                    </Grid.Column>
+                    
                 </Grid.Row>
-                <Grid.Row>
+                <Grid.Row centered style={{marginTop:"5%"}}>
                     <Grid.Column computer={12} mobile={6} centered>
                         {this.state.stage == 3  ? 
                             <div>

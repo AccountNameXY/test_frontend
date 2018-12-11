@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 //SemanticUI
-import { Image,Icon, Header,Segment,Button,Grid,Input,Label,Message } from 'semantic-ui-react'; 
+import { Image,Icon,Segment,Button,Grid,Input,Label,Message } from 'semantic-ui-react'; 
 import 'semantic-ui-css/semantic.min.css'
 
 //config
@@ -12,6 +11,7 @@ import config from "./config"
 //Components
 import Dropzone from "./components/dropzone/dropzone"
 import DecisionTree from "./components/decisionTree/decisionTree"
+import Header from "./components/header/header"
 
 import BackendConnector from "./backendConnector/backendConnector"
 let backendConnector = new BackendConnector()
@@ -24,11 +24,9 @@ class App extends React.Component{
       this.state={
         showDropzone: true 
       }
-
       this.config = config
       this.handleSubmit = this.handleSubmit.bind(this)
       this.pictureSubmit = this.pictureSubmit.bind(this)
-
   }
 
   async pictureSubmit(picture){
@@ -56,20 +54,24 @@ class App extends React.Component{
   render(){
       return(
           <Grid className={"App"}  centered>
-            <Grid.Row>
-              <Grid.Column computer={14}  style={{marginTop:"2%"}} centered> 
+            <Grid.Row centered>
+              {/* <Grid.Column computer={14}  style={{marginTop:"2%"}} centered> 
                 <Segment className="mainheader" textAlign="center">
                   <Image centered src="/images/lufthansa_2018.jpg" />
                   <Header as="h1" className="mainHeaderText">
                    Lufthansa
                   </Header>
                 </Segment>
-              </Grid.Column>
+              </Grid.Column> */}
+
+              <Header  />
             </Grid.Row>
+            
             <Grid.Row>
               <Grid.Column computer={10}  style={{marginTop:"5%"}} centered>
+              <Dropzone pictureSubmit={this.pictureSubmit}/>
               {this.state.showDropzone ? 
-               <Dropzone pictureSubmit={this.pictureSubmit}/>
+               null
               :
               <div>
                 {this.state.showLoading ?
@@ -80,7 +82,7 @@ class App extends React.Component{
                   <div>
                     <Message warning attached='bottom'>
                       <Icon name='warning' />
-                      Leider konnte wir auf deinem Bild nichts erkennen :( 
+                      Leider konnte wir auf deinem Bild nichts erkennen
                     </Message>
                     <DecisionTree data={this.config.decisionTree[0].Ebene1} handleSubmit={this.handleSubmit}/> 
                   </div>

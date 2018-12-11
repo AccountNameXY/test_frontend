@@ -43,15 +43,19 @@ class Dropzone extends React.Component{
         let {imagePreviewUrl} = this.state;
         let $imagePreview = null;
         if (imagePreviewUrl) {
-          $imagePreview = (<img src={imagePreviewUrl} />);
+          $imagePreview = (<img className="actualImage" src={imagePreviewUrl} />);
         }
     
         return (
-          <Segment className="dropZone"> 
+          <Segment className="dropZone">
+            <div clasName="centerDiv"> 
               <Label
+                    className="uploadZone"
                     as="label"
                     basic
                     htmlFor="upload"
+                    for="hidden-new-file"
+
                 >
                     <Button
                     icon="upload"
@@ -61,10 +65,11 @@ class Dropzone extends React.Component{
                     }}
                     labelPosition="right"
                     />
-                    <input  multiple type="file" onChange={this._handleImageChange} />
+                    <input className="inputField" id="hidden-new-file" multiple type="file" onChange={this._handleImageChange} />
                     <Button type="submit" onClick={this._handleSubmit}>Upload Image</Button>
                 </Label>    
-            <div>{$imagePreview}</div>
+              <div className="imagePreview">{$imagePreview}</div>
+            </div>
           </Segment>
         )
       }

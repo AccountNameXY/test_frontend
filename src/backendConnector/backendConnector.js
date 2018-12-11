@@ -25,11 +25,13 @@ class BackendConnector {
     }
 
     async pushTags(picture,tags){
-    let data = {
-        "picture": { picture},
-        "tags": {tags}
-    }
-    return await this.postPromise(config.url+"/post" , data)
+        console.log(picture);
+        let data = {
+            "picture": picture,
+            "tags": tags
+        }
+        console.log(data);
+        return await this.postPromise(config.url+"/post" , data)
     }
 }
 
