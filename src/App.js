@@ -25,7 +25,6 @@ class App extends React.Component{
         showDropzone: true 
       }
       this.config = config
-      this.handleSubmit = this.handleSubmit.bind(this)
       this.pictureSubmit = this.pictureSubmit.bind(this)
   }
 
@@ -44,11 +43,10 @@ class App extends React.Component{
         alert: alert, 
         showDropzone: false 
     })
+    console.log(this.state.file);
+    await backendConnector.pushTags(this.state.picture, "")
   } 
 
-  handleSubmit(tags){
-      backendConnector.pushTags(this.state.picture, tags)
-  }
 
   
   render(){
@@ -69,7 +67,7 @@ class App extends React.Component{
             
             <Grid.Row>
               <Grid.Column computer={10}  style={{marginTop:"5%"}} centered>
-              <Dropzone pictureSubmit={this.pictureSubmit}/>
+              <Dropzone pictureSubmit={this.pictureSubmit} />
               {this.state.showDropzone ? 
                null
               :
@@ -84,7 +82,7 @@ class App extends React.Component{
                       <Icon name='warning' />
                       Leider konnte wir auf deinem Bild nichts erkennen
                     </Message>
-                    <DecisionTree data={this.config.decisionTree[0].Ebene1} handleSubmit={this.handleSubmit}/> 
+                    <DecisionTree data={this.config.decisionTree[0].Ebene1}/> 
                   </div>
                 :null
                 }
