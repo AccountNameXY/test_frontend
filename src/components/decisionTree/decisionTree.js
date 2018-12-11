@@ -109,19 +109,21 @@ class DecisionTree extends Component{
                     
                 </Grid.Row>
                 <Grid.Row centered style={{marginTop:"5%"}}>
-                    <Grid.Column computer={12} mobile={6} centered>
+                    
                         {this.state.stage == 3  ? 
                             <div>
                                 {this.state.finalTags.map(tag => {
                                     return (
-                                        <Header >{tag.tag}</Header>
+                                    <Grid.Column computer={4} mobile={6} centered>
+                                        <Header >{tag.tag}</Header> 
+                                    </Grid.Column>
                                     )
                                 })}
                                 <Button onClick={this.handleSubmit}>Submit</Button>
                             </div>
                         :null
                         }
-                    </Grid.Column>
+                   
                 </Grid.Row>
             </Grid>
         )
