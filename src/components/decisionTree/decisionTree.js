@@ -79,23 +79,25 @@ class DecisionTree extends Component{
   
         return(
             <Grid stackable centered>
-                <Grid.Row centered style={{marginTop:"5%"}}>
-                   
-                        {this.hasData(this.props.data) ? 
-                        this.props.data.map((item,itemKey) => {
-                            return ( 
-                                <Grid.Column computer={12} mobile={6} centered style={{marginLeft:"5%",marginTop:"5%"}}>
-                                    <Button clasName="tag" value={item.name} onClick={this.handleEbene1}>{item.name}</Button>
-                                </Grid.Column>
-                            )
-                        })
-                        :null 
-                        }
-                    
+                <Grid.Row  style={{marginTop:"5%"}}>
+                    <Header>1. Ebene</Header>
+                </Grid.Row>
+                <Grid.Row centered >
+                    {this.hasData(this.props.data) ? 
+                    this.props.data.map((item,itemKey) => {
+                        return ( 
+                            <Grid.Column computer={3} mobile={6}  style={{marginTop:"2%"}}>
+                                <Button clasName="tag" value={item.name} onClick={this.handleEbene1}>{item.name}</Button>
+                            </Grid.Column>
+                        )
+                    })
+                    :null 
+                    }
+                </Grid.Row>
+                <Grid.Row centered>
+                    <Header >2.Ebene</Header>
                 </Grid.Row>
                 <Grid.Row centered style={{marginTop:"5%"}}>
-                   
-                        {console.log(this.state.stage)}
                         {this.state.stage > 1  ? 
                             this.state.nextContent.map((item,itemKey) => {
                             return ( 
@@ -106,10 +108,8 @@ class DecisionTree extends Component{
                         })
                         :null 
                         }
-                    
                 </Grid.Row>
                 <Grid.Row centered style={{marginTop:"5%"}}>
-                    
                         {this.state.stage == 3  ? 
                             <div>
                                 {this.state.finalTags.map(tag => {

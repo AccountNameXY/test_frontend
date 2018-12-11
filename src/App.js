@@ -66,7 +66,7 @@ class App extends React.Component{
             </Grid.Row>
             
             <Grid.Row>
-              <Grid.Column computer={10}  style={{marginTop:"5%"}} centered>
+              <Grid.Column computer={10} centered>
               <Dropzone pictureSubmit={this.pictureSubmit} />
               {this.state.showDropzone ? 
                null
@@ -78,11 +78,20 @@ class App extends React.Component{
                 }
                 {this.state.alert ? 
                   <div>
-                    <Message warning attached='bottom'>
-                      <Icon name='warning' />
-                      Leider konnte wir auf deinem Bild nichts erkennen
-                    </Message>
-                    <DecisionTree data={this.config.decisionTree[0].Ebene1}/> 
+                    
+                    {this.state.responseBool == true ?
+
+                      null 
+                    :
+                    <div>
+                        <Message warning attached='bottom'>
+                          <Icon name='warning' />
+                          Leider konnte wir auf deinem Bild nichts erkennen
+                        </Message>
+                        <DecisionTree data={this.config.decisionTree[0].Ebene1}/>
+                    </div>
+                     }
+                    
                   </div>
                 :null
                 }

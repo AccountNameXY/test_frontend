@@ -1,6 +1,6 @@
 .mainHeader{
-    width: 90em; 
-    height: 8em;
+    width: 80vw; 
+    height: 20vh;
     background-color: #001F52;
     margin-left: auto; 
     margin-right: auto;
@@ -18,6 +18,7 @@
     /* top: 50%;
     transform: translateY(-50%) */
 }
+
 .mainLogo{
     width: 5em; 
     height: 2em;

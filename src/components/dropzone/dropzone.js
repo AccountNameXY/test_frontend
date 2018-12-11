@@ -27,23 +27,21 @@ class Dropzone extends React.Component{
     
       async _handleImageChange(e) {
         e.preventDefault();
-    
-        // let reader = new FileReader();
-        let file = e.target.files[0];
-        // console.log(e.target.files[0])
-        // reader.onloadend = () => {
-          await this.setState({
-            file: file,
-            // imagePreviewUrl: reader.result
-          });
-        // }
         
-        // reader.readAsDataURL(file)
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        reader.onloadend = () => {
+          this.setState({
+            file: file,
+            imagePreviewUrl: reader.result
+          });
+        }
+        
+        reader.readAsDataURL(file)
 
       }
 
       handleSubmit(){
-        console.log(this.state.file);
         this.props.handleSubmit(this.state.file)
     }
     
