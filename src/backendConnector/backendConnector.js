@@ -40,7 +40,8 @@ class BackendConnector {
         let data = {
             "picture": picture.name,
         }
-        return await this.getPromise(config.url+"/classify/"+ data)
+        console.log(picture.name);
+        return await this.getPromise(config.url+"/classify/"+ picture.name)
     }
 }
 

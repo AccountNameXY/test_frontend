@@ -86,7 +86,7 @@ class DecisionTree extends Component{
                     {this.hasData(this.props.data) ? 
                     this.props.data.map((item,itemKey) => {
                         return ( 
-                            <Grid.Column computer={3} mobile={6}  style={{marginTop:"2%"}}>
+                            <Grid.Column computer={2} mobile={6}  style={{marginTop:"2%"}}>
                                 <Button clasName="tag" value={item.name} onClick={this.handleEbene1}>{item.name}</Button>
                             </Grid.Column>
                         )
@@ -94,18 +94,22 @@ class DecisionTree extends Component{
                     :null 
                     }
                 </Grid.Row>
-                <Grid.Row centered>
-                    <Header >2.Ebene</Header>
-                </Grid.Row>
+               
                 <Grid.Row centered style={{marginTop:"5%"}}>
                         {this.state.stage > 1  ? 
-                            this.state.nextContent.map((item,itemKey) => {
+                            <div>
+                             <Grid.Row centered>
+                                <Header >2.Ebene</Header>
+                            </Grid.Row>
+                            {this.state.nextContent.map((item,itemKey) => {
                             return ( 
-                            <Grid.Column computer={3} mobile={6} centered  style={{marginTop:"5%"}}>
+                            <Grid.Column computer={2} mobile={6} centered  style={{marginTop:"5%"}}>
                                     <Button className="tag" value={item.name} onClick={this.handleEbene2}>{item.name}</Button>
                             </Grid.Column>
                             )
-                        })
+                           
+                        }) 
+                        </div>
                         :null 
                         }
                 </Grid.Row>
