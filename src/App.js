@@ -12,8 +12,11 @@ import config from "./config"
 import Dropzone from "./components/dropzone/dropzone"
 import DecisionTree from "./components/decisionTree/decisionTree"
 import Header from "./components/header/header"
+import FlugzeugIdentifyer from "./components/flugzeugIdentifyer/flugzeugIdentifyer"
+
 
 import BackendConnector from "./backendConnector/backendConnector"
+import { CLIENT_RENEG_LIMIT } from 'tls';
 let backendConnector = new BackendConnector()
 
 class App extends React.Component{
@@ -26,6 +29,7 @@ class App extends React.Component{
       }
       this.config = config
       this.pictureSubmit = this.pictureSubmit.bind(this)
+      this.responseHasData = this.responseHasData.bind(this)
   }
 
   async pictureSubmit(picture){
@@ -33,7 +37,8 @@ class App extends React.Component{
     setTimeout(async ()=>{
       await this.setState({
         alert: true,
-        showLoading: false
+        showLoading: false,
+        // response: null
       })
     },3000)
     
@@ -43,9 +48,27 @@ class App extends React.Component{
         alert: alert, 
         showDropzone: false 
     })
-    console.log(this.state.file);
-    await backendConnector.pushTags(this.state.picture, "")
+    let response = await backendConnector.pushTags(this.state.picture)
+
+    console.log(response)
+    
+    await this.setState({
+      response: response
+    })
+
+
   } 
+
+  responseHasData(){
+    console.log(this.state.response.images[0].classifiers[1].classes[1].class)
+    return this.state.response !== undefined &&
+            this.state.response !== null && 
+            (this.state.response.images[0].classifiers[0].classes[0].class === "A380" ||
+            this.state.response.images[0].classifiers[0].classes[0].class === "A320" ) &&
+            (this.state.response.images[0].classifiers[1].classes[1].class === "airplane" ||
+            this.state.response.images[0].classifiers[1].classes[0].class === "airplane")
+            
+  }
 
 
   
@@ -78,10 +101,12 @@ class App extends React.Component{
                 }
                 {this.state.alert ? 
                   <div>
+                    {console.log(this.responseHasData())}
+                    {this.responseHasData()?
                     
-                    {this.state.responseBool == true ?
-
-                      null 
+                      // // <p>{this.state.response}</p>
+                      // console.log(this.state.response.images[0].classifiers[0].classes[0].class)
+                     <FlugzeugIdentifyer airplane={this.state.response.images[0].classifiers[0].classes[0].class} /> 
                     :
                     <div>
                         <Message warning attached='bottom'>

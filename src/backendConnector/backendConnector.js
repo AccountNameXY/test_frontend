@@ -1,4 +1,3 @@
-import axios from 'axios';
 let request = require("request");
 let config = require("./backend.json");
 
@@ -27,11 +26,11 @@ class BackendConnector {
         //         resolve(JSON.parse(body));
         //     })
         // })
-         axios.post(url,  data )
-        .then(res => {
-            console.log(res);
-            console.log(res.data);
-        })
+        //  axios.post(url,  data )
+        // .then(res => {
+        //     console.log(res);
+        //     console.log(res.data);
+        // })
     }
 
    
@@ -40,7 +39,6 @@ class BackendConnector {
         let data = {
             "picture": picture.name,
         }
-        console.log(picture.name);
         return await this.getPromise(config.url+"/classify/"+ picture.name)
     }
 }
