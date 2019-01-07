@@ -36,8 +36,14 @@ config.decisionTree=[{
 }]
 
 config.header={
-    title: "Lufthansa",
-    logo: "./images/logo.png"
+    title: "Media Lounge",
+    title2: "Lufthansa Group",
+    heading: "Upload your picture...",
+    logo: "./images/logo.png",
+}
+
+config.body={
+    bodyheading: "... or browse files",
 }
 
 
