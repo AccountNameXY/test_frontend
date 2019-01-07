@@ -75,6 +75,7 @@ class Dropzone extends React.Component{
                     <Button type="submit" onClick={this._handleSubmit}>Upload Image</Button>
                 </Label>    
               <div className="imagePreview">{$imagePreview}</div>
+            
             </div>
           </Segment>
         )

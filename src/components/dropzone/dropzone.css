@@ -11,8 +11,8 @@
     text-align: center;
     border: 2px white solid;
     border-radius: 30px;
-    height: 450px;
-    background-color: rgba(0, 31, 82, 0.932);
+    height: 350px;
+    background-color: /*rgba(0, 31, 82, 0.932)*/ rgba(255, 255, 255, 0.05);
 }
 
 .centerDiv{
