@@ -48,7 +48,7 @@
 
 .Browse{
     background-color: #001F52;
-    margin-top: 20%;
+    margin-top: 15%;
     margin-right: 75%;
 }
 .BrowseFiles{
@@ -57,12 +57,28 @@
     font-size: 20px;
 }
 
+.BrowseFiles:hover{
+    color: #F49E26;
+    cursor: pointer;
+}
 .BackToMediaLounge{
     color: white; 
     font-family: 'Nunito', sans-serif;
     font-size: 15px; 
 }
 
+.BackToMediaLounge:hover{
+    color: #F49E26;
+    cursor: pointer;    font-family: 'Nunito', sans-serif;
+    font-size: 15px; 
+}
+
 .URLmedialounge{
     color: white;
+}
+
+
+.URLmedialounge:hover{
+    color: #F49E26;
+    cursor: pointer;
 }
