@@ -18,8 +18,10 @@ class Header extends Component{
             <Grid.Column desktop={12} > 
                 <div className="mainHeader">
                     <p className="title">{config.header.title}</p>
+                    <p className="title2">{config.header.title2}</p>
+                    <p className="heading">{config.header.heading}</p>
                     {/* <img className="mainLogo" src={config.header.logo} alt="" />  */}
-                </div> 
+                </div>
             </Grid.Column>
         )
     }

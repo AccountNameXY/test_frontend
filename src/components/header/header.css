@@ -1,20 +1,54 @@
 .mainHeader{
-    width: 80vw; 
-    height: 20vh;
-    background-color: #001F52;
+    width: 90em; 
+    height: 15em;
+    background-color: white;
     margin-left: auto; 
     margin-right: auto;
-    
+    padding-left: 100%;
 }
 
 .title{
-    color: white; 
-    font-size: 50px;
-    font-weight: bold;
+    color: #001F52; 
+    font-size: 100px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    width: 99.5%;
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    /* left: 25%; */
+    transform: translateX(-98%);
+    margin-top: 0.5em !important;
+    text-transform: uppercase;
+    /* top: 50%;
+    transform: translateY(-50%) */
+}
+
+.title2{
+    color: #001F52; 
+    font-size: 35px;
+    font-family: Arial;
+    font-weight: bolder;
+    position: absolute;
+    width: 25%;
+    /* left: 90%; */
+    transform: translateX(-100%);
     margin-top: 0.25em !important;
+    text-transform: uppercase;
+    /* top: 50%;
+    transform: translateY(-50%) */
+}
+
+.heading{
+    color: #001F52; 
+    font-size: 25px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bolder;
+    position: absolute;
+    width: 99%;
+    /* left: 14.1%; */
+    top: 80%;
+    transform: translateX(-98%);
+    margin-top: 0.25em !important;
+    text-transform: uppercase;
     /* top: 50%;
     transform: translateY(-50%) */
 }
@@ -22,5 +56,6 @@
 .mainLogo{
     width: 5em; 
     height: 2em;
-    color: white
+    color: white;
 }
+

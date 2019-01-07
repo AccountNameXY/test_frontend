@@ -4,10 +4,15 @@
 
 .ui.basic.label.uploadZone{
     /* margin-left: 30% */
+    background-color:gray;
 }
 
 .ui.segment.dropZone{
-    text-align: center
+    text-align: center;
+    border: 2px white solid;
+    border-radius: 30px;
+    height: 450px;
+    background-color: rgba(0, 31, 82, 0.932);
 }
 
 .centerDiv{
