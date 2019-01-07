@@ -24,8 +24,6 @@
     /*height: 300px;*/
     margin-top: 4%;
     margin-left: 10%; 
-
-     
 }
 
 .actualImage{
@@ -35,11 +33,15 @@
 
 .GoBack{
     background-color:#001F52;
-    margin-top: 47%;
+    margin-top: 41.5%;
 }
 
 .BackToMediaLounge{
     color: white; 
     font-family: 'Nunito', sans-serif;
     font-size: 15px; 
+}
+
+.URLmedialounge{
+    color: white;
 }

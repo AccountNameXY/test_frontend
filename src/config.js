@@ -7,7 +7,7 @@ config.decisionTree=[{
             member:[    
                 {name: "Carsten Spohr"},
                 {name: "Thorsten Dirks"},
-                {name: "Harrry Hohmeister"},
+                {name: "Harry Hohmeister"},
                 {name: "Ulrik Svensson"},
                 {name: "Dr. Bettina Volkens"}
             ],
@@ -43,7 +43,6 @@ config.header={
 }
 
 config.body={
-    bodyheading: "... or browse files",
     BackToMediaLounge: "BACK TO THE LUFTHANSA MEDIALOUNGE",
 }
 

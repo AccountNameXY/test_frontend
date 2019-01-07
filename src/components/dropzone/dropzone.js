@@ -101,7 +101,7 @@ class Dropzone extends React.Component{
               <div className="imagePreview">{$imagePreview}</div>
             </div>  
             <div className="GoBack"> 
-              <p className="BackToMediaLounge">{config.body.BackToMediaLounge}</p>
+              <p className="BackToMediaLounge"> <a className="URLmedialounge" href="https://medialounge.lufthansagroup.com/de">{config.body.BackToMediaLounge}</a></p>
             </div>
           </Segment>
          
