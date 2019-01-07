@@ -15,7 +15,7 @@ config.decisionTree=[{
         {
             name:"Flotte",
             member:[
-                {name: "Airbus380-800"},
+                {name: "Airbus 380-800"},
                 {name: "Airbus A340-600"},
                 {name: "Airbus A350-900"},
                 {name: "Airbus A340-300"},

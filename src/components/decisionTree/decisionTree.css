@@ -2,3 +2,25 @@
     margin-left: 2%
 } */
 
+.ui.button{
+    text-align: center;
+    
+    border: 2px white solid;
+    border-radius: 10px;
+    background-color: /*rgba(0, 31, 82, 0.932)*/ rgba(255, 255, 255, 0.05);
+    color: white;
+    height: 60px;
+    width: 150px;
+    text-transform: uppercase;
+}
+.ui.button:hover{
+    color: #F49E26; 
+    border-color: #F49E26;
+    background-color: /*rgba(0, 31, 82, 0.932)*/ rgba(255, 255, 255, 0.05);
+}
+
+.ui.button:active{
+    color: #F49E26; 
+    border-color: #F49E26;
+    background-color: /*rgba(0, 31, 82, 0.932)*/ rgba(255, 255, 255, 0.1);
+}

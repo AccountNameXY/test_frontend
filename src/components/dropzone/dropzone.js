@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import config from "./../../config";
 
+
 //CSS
 import "./dropzone.css"
 import BackendConnector from "./../../backendConnector/backendConnector"
@@ -112,7 +113,10 @@ class Dropzone extends React.Component{
             <div className="GoBack"> 
               <p className="BackToMediaLounge"> <a className="URLmedialounge" href="https://medialounge.lufthansagroup.com/de">{config.body.BackToMediaLounge}</a></p>
             </div>
+            <div>  <Button >Button</Button> </div>
+
           </Segment>
+          
          
         )
       }
