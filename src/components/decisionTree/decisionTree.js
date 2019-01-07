@@ -31,7 +31,6 @@ class DecisionTree extends Component{
             stage1: e.target.value, 
             nextContent: nextContent
         })
-
     }
 
     async handleEbene2(e){

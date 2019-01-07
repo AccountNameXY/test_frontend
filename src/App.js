@@ -48,19 +48,19 @@ class App extends React.Component{
         alert: alert, 
         showDropzone: false 
     })
-    let response = await backendConnector.pushTags(this.state.picture)
+    // // let response = await backendConnector.pushTags(this.state.picture)
 
-    console.log(response)
+    // console.log(response)
     
-    await this.setState({
-      response: response
-    })
+    // await this.setState({
+    //   response: response
+    // })
 
 
   } 
 
   responseHasData(){
-    console.log(this.state.response.images[0].classifiers[1].classes[1].class)
+    // console.log(this.state.response.images[0].classifiers[1].classes[1].class)
     return this.state.response !== undefined &&
             this.state.response !== null && 
             (this.state.response.images[0].classifiers[0].classes[0].class === "A380" ||
