@@ -1,3 +1,5 @@
+import { CLIENT_RENEG_LIMIT } from "tls";
+
 let request = require("request");
 let config = require("./backend.json");
 
@@ -16,31 +18,30 @@ class BackendConnector {
     } 
 
     postPromise(url, data) {
-
-        console.log(data)
-        // return new Promise((resolve, reject) => {
-        //     request.post(url, {form: data}, (error, response, body) => {
-        //         if(error) {
-        //             return reject(error);
-        //         }
-        //         resolve(JSON.parse(body));
-        //     })
-        // })
-        //  axios.post(url,  data )
-        // .then(res => {
-        //     console.log(res);
-        //     console.log(res.data);
-        // })
+        return new Promise((resolve, reject) => {
+            request.post(url, {form: data}, (error, response, body) => {
+                if(error) {
+                    return reject(error);
+                }
+                resolve(JSON.parse(body));
+            })
+        })
     }
 
+    async postPicture(fd){
+        let options = {
+            content: fd 
+        }
+        return await this.postPromise(config.url+"/classify", JSON.stringify(options))
+    }
    
 
-    async pushTags(picture){
-        let data = {
-            "picture": picture.name,
-        }
-        return await this.getPromise(config.url+"/classify/"+ picture.name)
-    }
+    // async pushTags(picture){
+    //     let data = {
+    //         "picture": picture.name,
+    //     }
+    //     return await this.getPromise(config.url+"/classify/"+ picture.name)
+    // }
 }
 
 export default BackendConnector;
