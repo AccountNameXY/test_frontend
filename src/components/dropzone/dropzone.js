@@ -113,8 +113,6 @@ class Dropzone extends React.Component{
             <div className="GoBack"> 
               <p className="BackToMediaLounge"> <a className="URLmedialounge" href="https://medialounge.lufthansagroup.com/de">{config.body.BackToMediaLounge}</a></p>
             </div>
-            <div>  <Button >Button</Button> </div>
-
           </Segment>
           
          
