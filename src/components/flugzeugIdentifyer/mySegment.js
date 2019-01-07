@@ -16,9 +16,7 @@ class MySegment extends Component{
         if(this.props.type === this.props.airplane ){
             classNames.push("hit")
         }
-        console.log(classNames.join(" "))
         return classNames.join(" ")
-
     }
 
     render(){

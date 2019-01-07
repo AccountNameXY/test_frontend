@@ -3,10 +3,12 @@ import config from "./../../config";
 
 //CSS
 import "./dropzone.css"
+import BackendConnector from "./../../backendConnector/backendConnector"
 
 
 //Semantic UI
 import {Button,Label,Segment} from "semantic-ui-react" 
+let backendConnector = new BackendConnector()
 
 class Dropzone extends React.Component{
     constructor(props) {
@@ -30,6 +32,7 @@ class Dropzone extends React.Component{
         e.preventDefault();
         
         let reader = new FileReader();
+
         let file = e.target.files[0];
         reader.onloadend = () => {
           this.setState({
@@ -39,12 +42,30 @@ class Dropzone extends React.Component{
         }
         
         reader.readAsDataURL(file)
-
       }
 
-      handleSubmit(){
-        this.props.handleSubmit(this.state.file)
-    }
+      async handleSubmit(){
+        let fd = new FormData()
+        // var imagedata = document.querySelector('input[type="file"]').files[0];
+        fd.append("image", this.state.file)
+        // let response = await backendConnector.postPicture(fd)
+
+        fetch("http://localhost:8081/classify", {
+          mode: 'no-cors',
+          method: "POST",
+          body: fd
+        }).then(function (res) {
+          if (res.ok) {
+            alert("Perfect! ");
+          } else if (res.status == 401) {
+            alert("Oops! ");
+          }
+        }, function (e) {
+          alert("Error submitting form!");
+        });
+              // backendConnector.postPicture(fd)
+              // this.props.handleSubmit(this.state.file)
+        }
     
       render() {
         let {imagePreviewUrl} = this.state;
@@ -72,8 +93,10 @@ class Dropzone extends React.Component{
                     }}
                     labelPosition="right"
                     />
-                    <input ref={this.myRef} className="inputField" id="hidden-new-file" multiple type="file" onChange={this._handleImageChange} />
-                    <Button type="submit" onClick={this._handleSubmit}>Upload Image</Button>
+                    <form encType="multipart/form-data" action="">
+                      <input ref={this.myRef} className="inputField" id="hidden-new-file" multiple type="file" onChange={this._handleImageChange} />
+                    </form>
+                    <Button type="submit" onClick={this.handleSubmit}>Upload Image</Button>
                 </Label>    
               <div className="imagePreview">{$imagePreview}</div>
             </div>  
