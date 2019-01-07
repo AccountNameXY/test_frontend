@@ -44,6 +44,7 @@ config.header={
 
 config.body={
     bodyheading: "... or browse files",
+    BackToMediaLounge: "BACK TO THE LUFTHANSA MEDIALOUNGE",
 }
 
 
