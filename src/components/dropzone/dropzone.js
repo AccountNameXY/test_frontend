@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import config from "./../../config";
 
 //CSS
 import "./dropzone.css"
@@ -98,9 +99,21 @@ class Dropzone extends React.Component{
                     <Button type="submit" onClick={this.handleSubmit}>Upload Image</Button>
                 </Label>    
               <div className="imagePreview">{$imagePreview}</div>
+            </div> 
+
+            <div className="DragDrop"> 
+              <p className="DragAndDrop">{config.body.DragAndDrop}</p>
+            </div> 
             
+            <div className="Browse"> 
+              <p className="BrowseFiles">{config.body.BrowseFiles}</p>
+            </div> 
+            
+            <div className="GoBack"> 
+              <p className="BackToMediaLounge">{config.body.BackToMediaLounge}</p>
             </div>
           </Segment>
+         
         )
       }
     

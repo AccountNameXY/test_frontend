@@ -43,7 +43,9 @@ config.header={
 }
 
 config.body={
-    bodyheading: "... or browse files",
+    DragAndDrop: "DRAG & DROP YOUR FILE HERE",
+    BackToMediaLounge: "BACK TO THE LUFTHANSA MEDIALOUNGE",
+    BrowseFiles: "...OR BROWSE FILES",
 }
 
 
