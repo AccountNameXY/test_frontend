@@ -33,7 +33,7 @@
 
 .GoBack{
     background-color:#001F52;
-    margin-top: 47%;
+    margin-top: 41.5%;
 }
 
 
@@ -62,3 +62,8 @@
     font-family: 'Nunito', sans-serif;
     font-size: 15px; 
 }
+
+.URLmedialounge{
+    color: white;
+}
+

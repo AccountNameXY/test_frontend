@@ -80,8 +80,8 @@ class DecisionTree extends Component{
             <Grid stackable centered>
                 {this.hasData(this.props.data) ?
                     <Grid>
-                        <Grid.Row centered style={{marginTop:"5%",marginLeft:"2%"}}>
-                            <Grid.Column computer={12} centered>
+                        <Grid.Row centered style={{marginTop:"20%",marginLeft:"2%"}}>
+                            <Grid.Column computer={12} centered >
                                 < Header>1. Ebene</Header>
                             </Grid.Column>
                         </Grid.Row> 
@@ -103,7 +103,7 @@ class DecisionTree extends Component{
                 <Grid>
                     <Grid.Row centered style={{marginTop:"5%",marginLeft: "30%"}}>
                         <Grid.Column computer={12} mobile={6} centered >
-                            <Header >2.Ebene</Header>
+                            <Header>2.Ebene</Header>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>

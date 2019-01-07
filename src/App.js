@@ -123,7 +123,8 @@ class App extends React.Component{
               </div>
               }
 
-                  
+                                          <DecisionTree data={this.config.decisionTree[0].Ebene1}/>
+
                  
               </Grid.Column>
             </Grid.Row>
