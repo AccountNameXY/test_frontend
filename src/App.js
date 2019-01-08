@@ -13,6 +13,7 @@ import Dropzone from "./components/dropzone/dropzone"
 import DecisionTree from "./components/decisionTree/decisionTree"
 import Header from "./components/header/header"
 import FlugzeugIdentifyer from "./components/flugzeugIdentifyer/flugzeugIdentifyer"
+import Bottom from "./components/bottom/bottom"
 
 
 import BackendConnector from "./backendConnector/backendConnector"
@@ -91,6 +92,7 @@ class App extends React.Component{
             <Grid.Row>
               <Grid.Column computer={10} centered>
               <Dropzone pictureSubmit={this.pictureSubmit} />
+              <Bottom /> 
               {this.state.showDropzone ? 
                null
               :

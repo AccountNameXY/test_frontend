@@ -24,3 +24,11 @@
     border-color: #F49E26;
     background-color: /*rgba(0, 31, 82, 0.932)*/ rgba(255, 255, 255, 0.1);
 }
+
+.ui.header{
+    color: white; 
+}
+
+.Ebene{
+    text-align: center; 
+}

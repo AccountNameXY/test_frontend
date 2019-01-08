@@ -80,16 +80,16 @@ class DecisionTree extends Component{
             <Grid stackable centered>
                 {this.hasData(this.props.data) ?
                     <Grid>
-                        <Grid.Row centered style={{marginTop:"20%",marginLeft:"2%"}}>
+                        <Grid.Row centered style={{marginTop:"20%"}}>
                             <Grid.Column computer={12} centered >
-                                < Header>1. Ebene</Header>
+                                <Header centered> <p className="Ebene"> 1. Ebene </p></Header>
                             </Grid.Column>
                         </Grid.Row> 
                         <Grid.Row>
                             {this.props.data.map((item,itemKey) => {
                                 return ( 
-                                    <Grid.Column computer={6} mobile={6} centered style={{marginTop:"5%"}}>
-                                        <Button clasName="tag" value={item.name} onClick={this.handleEbene1}>{item.name}</Button>
+                                    <Grid.Column computer={6} mobile={6} centered style={{marginTop:"5%",marginLeft:"4%"}}>
+                                        <Button className="tag" value={item.name} onClick={this.handleEbene1}>{item.name}</Button>
                                     </Grid.Column>
                                 )
                             })
@@ -101,7 +101,7 @@ class DecisionTree extends Component{
                                 
                 {this.state.stage > 1  ? 
                 <Grid>
-                    <Grid.Row centered style={{marginTop:"5%",marginLeft: "30%"}}>
+                    <Grid.Row centered style={{marginTop:"5%",marginLeft: "0%"}}>
                         <Grid.Column computer={12} mobile={6} centered >
                             <Header>2.Ebene</Header>
                         </Grid.Column>

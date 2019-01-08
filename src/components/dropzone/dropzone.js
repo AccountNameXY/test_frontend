@@ -105,14 +105,6 @@ class Dropzone extends React.Component{
             <div className="DragDrop"> 
               <p className="DragAndDrop">{config.body.DragAndDrop}</p>
             </div> 
-            
-            <div className="Browse"> 
-              <p className="BrowseFiles">{config.body.BrowseFiles}</p>
-            </div> 
-            
-            <div className="GoBack"> 
-              <p className="BackToMediaLounge"> <a className="URLmedialounge" href="https://medialounge.lufthansagroup.com/de">{config.body.BackToMediaLounge}</a></p>
-            </div>
           </Segment>
           
          

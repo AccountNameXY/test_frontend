@@ -1,0 +1,26 @@
+.GoBackToMedialounge{
+    color: white; 
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px; 
+    text-align: center; 
+    text-transform: uppercase; 
+    
+}
+
+.URLmedialounge{
+    color: white;
+}
+
+.URLmedialounge:hover{
+    color: #F49E26;
+}
+
+.BrowseFiles{
+    color: white; 
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+}
+
+.BrowseFiles:hover{
+    color: #F49E26; 
+}
