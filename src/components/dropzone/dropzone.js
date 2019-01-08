@@ -17,6 +17,7 @@ class Dropzone extends React.Component{
         this.state = {
           file: '',
           imagePreviewUrl: '',
+          pictureUploaded: true
         };
         this._handleImageChange = this._handleImageChange.bind(this);
         this._handleSubmit = this._handleSubmit.bind(this);
@@ -106,8 +107,17 @@ class Dropzone extends React.Component{
 
             <div className="DragDrop"> 
               <p className="DragAndDrop">{config.body.DragAndDrop}</p>
-            </div> 
+            </div>
+
+            <div>
+            <p className="BrowseFiles">...OR BROWSE FILES</p>
+          </div>
           </Segment>
+
+          
+
+          
+          
           
         )
       }

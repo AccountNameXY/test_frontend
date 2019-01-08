@@ -15,12 +15,3 @@
     color: #F49E26;
 }
 
-.BrowseFiles{
-    color: white; 
-    font-family: 'Nunito', sans-serif;
-    font-size: 20px;
-}
-
-.BrowseFiles:hover{
-    color: #F49E26; 
-}
