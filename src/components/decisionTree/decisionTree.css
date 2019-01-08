@@ -4,10 +4,9 @@
 
 .ui.button{
     text-align: center;
-    
     border: 2px white solid;
     border-radius: 10px;
-    background-color: /*rgba(0, 31, 82, 0.932)*/ rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.05);
     color: white;
     height: 60px;
     width: 150px;
@@ -16,12 +15,14 @@
 .ui.button:hover{
     color: #F49E26; 
     border-color: #F49E26;
-    background-color: /*rgba(0, 31, 82, 0.932)*/ rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
 }
 
-.ui.button:active{
+.ui.button:focus{
     color: #F49E26; 
     border-color: #F49E26;
+<<<<<<< HEAD
     background-color: /*rgba(0, 31, 82, 0.932)*/ rgba(255, 255, 255, 0.1);
 }
 
@@ -31,4 +32,12 @@
 
 .Ebene{
     text-align: center; 
+=======
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.ui.button:active{
+    color: #001F52; 
+    border-color: #F49E26;
+    background-color: #F49E26;
+>>>>>>> a30b780906d8dbd373d63557cd52e626ada6b961
 }
