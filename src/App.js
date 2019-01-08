@@ -14,6 +14,7 @@ import DecisionTree from "./components/decisionTree/decisionTree"
 import Header from "./components/header/header"
 import FlugzeugIdentifyer from "./components/flugzeugIdentifyer/flugzeugIdentifyer"
 import Bottom from "./components/bottom/bottom"
+import UploadDecision from "./components/uploadDecision/uploadDecision"
 
 
 import BackendConnector from "./backendConnector/backendConnector"
@@ -88,11 +89,20 @@ class App extends React.Component{
 
               <Header  />
             </Grid.Row>
-            
-            <Grid.Row>
+            <Grid.Row>      
+
+            <Grid.Column computer={7}>
+               <UploadDecision />
+            </Grid.Column>
+
+            <Grid.Column computer={7}>
+              <UploadDecision />
+            </Grid.Column> 
+
               <Grid.Column computer={10} centered>
               <Dropzone pictureSubmit={this.pictureSubmit} />
               <Bottom /> 
+            
               {this.state.showDropzone ? 
                null
               :

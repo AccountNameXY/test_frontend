@@ -32,8 +32,7 @@
     /* left: 90%; */
     transform: translateX(-100%);
     margin-top: 0.25em !important;
-    text-transform: uppercase;
-    position: absolute; 
+    text-transform: uppercase; 
     /* top: 50%;
     transform: translateY(-50%) */
 }
