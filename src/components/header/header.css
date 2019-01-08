@@ -7,7 +7,7 @@
     padding-left: 100%;
 }
 
-.title{
+.titleMedialounge{
     color: #001F52; 
     font-size: 100px;
     font-family: 'Nunito', sans-serif;
@@ -22,7 +22,7 @@
     transform: translateY(-50%) */
 }
 
-.title2{
+.titleLufthansaGroup{
     color: #001F52; 
     font-size: 35px;
     font-family: Arial;
@@ -33,11 +33,12 @@
     transform: translateX(-100%);
     margin-top: 0.25em !important;
     text-transform: uppercase;
+    position: absolute; 
     /* top: 50%;
     transform: translateY(-50%) */
 }
 
-.heading{
+.uploadYourPic{
     color: #001F52; 
     font-size: 25px;
     font-family: 'Nunito', sans-serif;
