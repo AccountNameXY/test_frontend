@@ -13,10 +13,10 @@ let backendConnector = new BackendConnector()
 
 class Dropzone extends React.Component{
     constructor(props) {
-        super(props);
+        super(props); 
         this.state = {
           file: '',
-          imagePreviewUrl: ''
+          imagePreviewUrl: '',
         };
         this._handleImageChange = this._handleImageChange.bind(this);
         this._handleSubmit = this._handleSubmit.bind(this);
@@ -50,7 +50,6 @@ class Dropzone extends React.Component{
         // var imagedata = document.querySelector('input[type="file"]').files[0];
         fd.append("image", this.state.file)
         // let response = await backendConnector.postPicture(fd)
-
         fetch("http://localhost:8081/classify", {
           mode: 'no-cors',
           method: "POST",
@@ -76,8 +75,11 @@ class Dropzone extends React.Component{
         }
     
         return (
+          this.state.pictureUploaded ?
+          null
+          :
           <Segment className="dropZone">
-            <div clasName="centerDiv"> 
+            <div className="centerDiv"> 
               <Label
                     className="uploadZone"
                     as="label"
@@ -107,7 +109,6 @@ class Dropzone extends React.Component{
             </div> 
           </Segment>
           
-         
         )
       }
     
