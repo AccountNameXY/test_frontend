@@ -80,15 +80,15 @@ class DecisionTree extends Component{
             <Grid stackable centered>
                 {this.hasData(this.props.data) ?
                     <Grid>
-                        <Grid.Row centered style={{marginTop:"20%"}}>
+                        {/* <Grid.Row centered style={{marginTop:"20%"}}>
                             <Grid.Column computer={12} centered >
                                 <Header centered> <p className="Ebene"> 1. Ebene </p></Header>
                             </Grid.Column>
-                        </Grid.Row> 
+                        </Grid.Row>  */}
                         <Grid.Row>
                             {this.props.data.map((item,itemKey) => {
                                 return ( 
-                                    <Grid.Column computer={6} mobile={6} centered style={{marginTop:"5%",marginLeft:"4%"}}>
+                                    <Grid.Column computer={6} mobile={6} centered style={{marginTop:"5%",marginLeft:"10%"}}>
                                         <Button className="tag" value={item.name} onClick={this.handleEbene1}>{item.name}</Button>
                                     </Grid.Column>
                                 )
@@ -101,15 +101,15 @@ class DecisionTree extends Component{
                                 
                 {this.state.stage > 1  ? 
                 <Grid>
-                    <Grid.Row centered style={{marginTop:"5%",marginLeft: "0%"}}>
+                    {/* <Grid.Row centered style={{marginTop:"5%"}}>
                         <Grid.Column computer={12} mobile={6} centered >
-                            <Header>2.Ebene</Header>
+                            <Header> <p className="Ebene"> 2. Ebene </p> </Header>
                         </Grid.Column>
-                    </Grid.Row>
+                    </Grid.Row> */}
                     <Grid.Row>
                     {this.state.nextContent.map((item,itemKey) => {
                         return ( 
-                            <Grid.Column computer={3} mobile={6} centered  style={{marginTop:"5%"}}>
+                            <Grid.Column computer={3} mobile={6} centered  style={{marginTop:"3%", marginLeft:"5%"}}>
                                     <Button className="tag" value={item.name} onClick={this.handleEbene2}>{item.name}</Button>
                             </Grid.Column>
                         )
@@ -118,10 +118,31 @@ class DecisionTree extends Component{
                 </Grid>
                 :null 
                 }
+
+                <Grid.Row centered style={{marginTop:"5%", marginBottom:"10%"}}>
+                   
+                   {this.state.stage == 3  ? 
+                       <Grid>
+                       <Grid.Row>
+                       {this.state.nextContent.map((item,itemKey) => {
+                           return ( 
+                               <Grid.Column computer={3} mobile={6} centered  style={{marginTop:"5%", marginLeft:"5%"}}>
+                                       <Button className="tag" value={item.name} onClick={this.handleEbene2}>{item.name}</Button>
+                               </Grid.Column>
+                           )
+                       })}
+                       </Grid.Row>
+                   </Grid>
+                   :null
+                   }
+              
+           </Grid.Row>
+
+
                 
                 <Grid.Row centered style={{marginTop:"5%", marginBottom:"10%"}}>
                    
-                        {this.state.stage == 3  ? 
+                        {this.state.stage == 4  ? 
                              <Segment ><div style={{width:"50vw", height:"60 vh"}}>
                                 {this.state.finalTags.map(tag => {
                                     return (

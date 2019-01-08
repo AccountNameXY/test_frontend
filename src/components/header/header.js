@@ -17,9 +17,9 @@ class Header extends Component{
         return( 
             <Grid.Column desktop={12} > 
                 <div className="mainHeader">
-                    <p className="title">{config.header.title}</p>
-                    <p className="title2">{config.header.title2}</p>
-                    <p className="heading">{config.header.heading}</p>
+                    <p className="titleMedialounge">{config.header.titleMedialounge}</p>
+                    <p className="titleLufthansaGroup">{config.header.titleLufthansaGroup}</p>
+                    <p className="uploadYourPic">{config.header.uploadYourPic}</p>
                     {/* <img className="mainLogo" src={config.header.logo} alt="" />  */}
                 </div>
             </Grid.Column>
