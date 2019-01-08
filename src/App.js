@@ -96,7 +96,7 @@ class App extends React.Component{
             </Grid.Column>
 
             <Grid.Column computer={7}>
-              <UploadDecision />
+              <DecisionTree data={this.config.decisionTree[0].Ebene1}/>
             </Grid.Column> 
 
               <Grid.Column computer={10} centered>
@@ -135,7 +135,7 @@ class App extends React.Component{
               </div>
               }
 
-                                          <DecisionTree data={this.config.decisionTree[0].Ebene1}/>
+                                          {/* <DecisionTree data={this.config.decisionTree[0].Ebene1}/> */}
 
                  
               </Grid.Column>
