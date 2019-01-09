@@ -37,6 +37,7 @@ class App extends React.Component{
       this.pictureSubmit = this.pictureSubmit.bind(this)
       this.responseHasData = this.responseHasData.bind(this)
       this.changeSubmitBoolean = this.changeSubmitBoolean.bind(this)
+      this.changeStateBoolean = this.changeStateBoolean.bind(this)
   }
 
   async pictureSubmit(picture){
@@ -83,42 +84,11 @@ class App extends React.Component{
     console.log(this.state)
   }
 
-  async setPictureUploadedFalse(){
+  async changeStateBooleanToTrue(shown){
     await this.setState({
-      pictureUploaded: false
+      shown: true
     })
   }
-
-async setPictureUploadedTrue(){
-  await this.setState({
-    pictureUploaded: true
-  })
-}
-
-async setPictureSelectedFalse(){
-  await this.setState({
-    pictureSelected: false
-  })
-}
-
-async setPictureSelectedTrue(){
-await this.setState({
-  pictureSelected: true
-})
-}
-
-async setTagManuallyFalse(){
-  await this.setState({
-    tagManually: false
-  })
-}
-
-async setTagManuallyTrue(){
-await this.setState({
-  tagManually: true
-})
-}
-
   
   render(){
       return(
@@ -139,20 +109,23 @@ await this.setState({
 
             <Grid.Column computer={7} style={{border:"2px white solid"}}>
                <ShowPicture
-               /* Übergebene Variablen */ submitted={this.state.submitted} pictureSelected={this.state.pictureSelected} pictureUploaded={this.state.pictureUploaded} tagManually={this.state.tagManually} 
-               /* Übergebene Methoden */ setPictureSelectedFalse={this.setPictureSelectedFalse} setPictureSelectedTrue={this.setPictureSelectedTrue} changeSubmitBoolean={this.changeSubmitBoolean}/>
+                submitted={this.state.submitted} pictureSelected={this.state.pictureSelected} pictureUploaded={this.state.pictureUploaded} tagManually={this.state.tagManually} 
+                changeStateBoolean={this.changeStateBoolean}/>
             </Grid.Column>
 
             <Grid.Column computer={7} style={{border:"2px white solid"}}>
               <DecisionTree data={this.config.decisionTree[0].Ebene1}  
-              /* Übergebene Variablen */ submitted={this.state.submitted} pictureSelected={this.state.pictureSelected} pictureUploaded={this.state.pictureUploaded} tagManually={this.state.tagManually}
-              /* Übergebene Methoden */ setPictureSelectedFalse={this.setPictureSelectedFalse} setPictureSelectedTrue={this.setPictureSelectedTrue} setPictureUploadedFalse={this.setPictureUploadedFalse} setPictureUploadedTrue={this.setPictureUploadedTrue} setTagManuallyFalse={this.setTagManuallyFalse} setTagManuallyTrue={this.setTagManuallyTrue}/>
-            </Grid.Column> 
-
-              <Grid.Column computer={10} centered>
-              <Dropzone pictureSubmit={this.pictureSubmit} 
-              /* Übergebene Variablen */ submitted={this.state.submitted} pictureSelected={this.state.pictureSelected} pictureUploaded={this.state.pictureUploaded} tagManually={this.state.tagManually}
-              /* Übergebene Methoden */ setPictureSelectedFalse={this.setPictureSelectedFalse} setPictureSelectedTrue={this.setPictureSelectedTrue} />
+              submitted={this.state.submitted} pictureSelected={this.state.pictureSelected} pictureUploaded={this.state.pictureUploaded} tagManually={this.state.tagManually}
+              changeStateBoolean={this.changeStateBoolean}/>
+            </Grid.Column>  
+             < Grid.Column computer={10} centered>
+            {this.state.pictureSelected ?
+                null
+              :
+             
+                <Dropzone pictureSubmit={this.pictureSubmit} submitted={this.state.submitted} pictureSelected={this.state.pictureSelected} pictureUploaded={this.state.pictureUploaded} tagManually={this.state.tagManually}
+                changeStateBoolean={this.changeStateBoolean}/>
+            }
               <Bottom /> 
             
               {this.state.showDropzone ? 

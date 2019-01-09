@@ -35,6 +35,7 @@ class Dropzone extends React.Component{
         let reader = new FileReader();
 
         let file = e.target.files[0];
+        this.props.changeStateBoolean(this.state.pictureSelected);
         reader.onloadend = () => {
           this.setState({
             file: file,
@@ -42,7 +43,7 @@ class Dropzone extends React.Component{
           });
         }
         
-        reader.readAsDataURL(file)
+        reader.readAsDataURL(file);
       }
 
 
@@ -67,6 +68,8 @@ class Dropzone extends React.Component{
               // backendConnector.postPicture(fd)
               // this.props.handleSubmit(this.state.file)
         }
+
+
     
       render() {
         let {imagePreviewUrl} = this.state;
@@ -109,10 +112,9 @@ class Dropzone extends React.Component{
               <p className="DragAndDrop">{config.body.DragAndDrop}</p>
             </div>
 
-            <Grid stackable centered>
+            <Grid>
               <GridRow>
-                <GridColumn computer={8}><p className="BrowseFiles">...OR BROWSE FILES</p></GridColumn>
-                <GridColumn computer={8}><Button style={{marginTop:"22%", marginLeft:"50%"}}>Upload</Button></GridColumn>
+                <GridColumn computer={8} style={{paddingTop:"10%"}}><p className="BrowseFiles">...OR BROWSE FILES</p></GridColumn>
               </GridRow>
             </Grid>
                   

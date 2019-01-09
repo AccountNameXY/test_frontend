@@ -42,14 +42,14 @@
 
 .BrowseFiles{
     color: white; 
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Nunito', sans-serif; 
     font-size: 20px;
-    padding-top: 100px;
     text-align: left; 
 }
 
 .BrowseFiles:hover{
     color: #F49E26; 
+    cursor: pointer;
 }
 
 .PreviewUpload{
