@@ -17,6 +17,17 @@ import FlugzeugIdentifyer from "./components/flugzeugIdentifyer/flugzeugIdentify
 
 import BackendConnector from "./backendConnector/backendConnector"
 import { CLIENT_RENEG_LIMIT } from 'tls';
+
+// const exiftool = require("exiftool-vendored").exiftool
+ 
+// And to verify everything is working:
+// exiftool
+//   .version()
+//   .then(version => console.log(`We're running ExifTool v${version}`))
+// import classNames from 'classnames'
+// import Dropzone  from 'react-dropzone'
+
+
 let backendConnector = new BackendConnector()
 
 class App extends React.Component{
@@ -48,6 +59,8 @@ class App extends React.Component{
         alert: alert, 
         showDropzone: false 
     })
+
+    
     // // let response = await backendConnector.pushTags(this.state.picture)
 
     // console.log(response)
@@ -55,10 +68,14 @@ class App extends React.Component{
     // await this.setState({
     //   response: response
     // })
-
+    
 
   } 
 
+  onDrop = (acceptedFiles, rejectedFiles) => {
+    // Do something with files
+  }
+  
   responseHasData(){
     // console.log(this.state.response.images[0].classifiers[1].classes[1].class)
     return this.state.response !== undefined &&
@@ -90,7 +107,26 @@ class App extends React.Component{
             
             <Grid.Row>
               <Grid.Column computer={10} centered>
-              <Dropzone pictureSubmit={this.pictureSubmit} />
+              {/* <Dropzone onDrop={this.onDrop}>
+                {({getRootProps, getInputProps, isDragActive}) => {
+                  return (
+                    
+                    <div
+                      {...getRootProps()}
+                      className={classNames('dropzone', {'dropzone--isActive': isDragActive})}
+                    >
+                    {console.log(getRootProps)}
+                      <input {...getInputProps()} />
+                      {
+                        isDragActive ?
+                          <p>Drop files here...</p> :
+                          <p>Try dropping some files here, or click to select files to upload.</p>
+                      }
+                    </div>
+                  )
+                }}
+              </Dropzone>               */}
+              <Dropzone handleSubmit={this.pictureSubmit} />
               {this.state.showDropzone ? 
                null
               :
@@ -102,12 +138,12 @@ class App extends React.Component{
                 {this.state.alert ? 
                   <div>
                     {console.log(this.responseHasData())}
-                    {this.responseHasData()?
+                    {/* {this.responseHasData()? */}
                     
-                      // // <p>{this.state.response}</p>
-                      // console.log(this.state.response.images[0].classifiers[0].classes[0].class)
+                      {/* // // <p>{this.state.response}</p>
+                      // console.log(this.state.response.images[0].classifiers[0].classes[0].class) */}
                      <FlugzeugIdentifyer airplane={this.state.response.images[0].classifiers[0].classes[0].class} /> 
-                    :
+                    {/* : */}
                     <div>
                         <Message warning attached='bottom'>
                           <Icon name='warning' />
@@ -115,7 +151,7 @@ class App extends React.Component{
                         </Message>
                         <DecisionTree data={this.config.decisionTree[0].Ebene1}/>
                     </div>
-                     }
+                     {/* } */}
                     
                   </div>
                 :null
