@@ -1,0 +1,18 @@
+.GoBackToMedialounge{
+    color: white; 
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px; 
+    text-align: center; 
+    text-transform: uppercase; 
+    padding-top: 10%;
+    
+}
+
+.URLmedialounge{
+    color: white;
+}
+
+.URLmedialounge:hover{
+    color: #F49E26;
+}
+

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import config from "./../../config";
+
 
 //CSS
 import "./dropzone.css"
@@ -18,11 +20,11 @@ let backendConnector = new BackendConnector()
 
 class MyDropzone extends React.Component{
     constructor(props) {
-        super(props);
+        super(props); 
         this.state = {
           files:[],
           file: '',
-          imagePreviewUrls: []
+          imagePreviewUrl: '',
         };
         this._handleImageChange = this._handleImageChange.bind(this);
         this._handleSubmit = this._handleSubmit.bind(this);
@@ -56,6 +58,7 @@ class MyDropzone extends React.Component{
         })                                                                                                   
       }
 
+
       async handleSubmit(){
         this.state.files.map((item, index)=>{
             let fd = new FormData()
@@ -84,8 +87,11 @@ class MyDropzone extends React.Component{
         }
     
         return (
+          this.state.pictureUploaded ?
+          null
+          :
           <Segment className="dropZone">
-            <div clasName="centerDiv"> 
+            <div className="centerDiv"> 
               <Label
                 className="uploadZone"
                 as="label"
@@ -130,9 +136,27 @@ class MyDropzone extends React.Component{
                   //   // )
                   // })
                 :null 
-                } */}
+                } */}   
+              <div className="imagePreview">{$imagePreview}</div>
+            </div> 
+
+            <div className="DragDrop"> 
+              <p className="DragAndDrop">{config.body.DragAndDrop}</p>
             </div>
+
+            <Grid>
+              <GridRow>
+                <GridColumn computer={8} style={{paddingTop:"10%"}}><p className="BrowseFiles">...OR BROWSE FILES</p></GridColumn>
+              </GridRow>
+            </Grid>
+                  
           </Segment>
+
+          
+
+          
+          
+          
         )
       }
     
