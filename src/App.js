@@ -123,7 +123,7 @@ class App extends React.Component{
                     <div>
                         <Message warning attached='bottom'>
                           <Icon name='warning' />
-                          Leider konnte wir auf deinem Bild nichts erkennen
+                          Leider konnte auf deinem Bild nichts erkannt werden.
                         </Message>
                         <DecisionTree data={this.config.decisionTree[0].Ebene1}/>
                     </div>
