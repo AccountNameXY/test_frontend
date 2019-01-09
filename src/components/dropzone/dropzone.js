@@ -8,7 +8,7 @@ import BackendConnector from "./../../backendConnector/backendConnector"
 
 
 //Semantic UI
-import {Button,Label,Segment} from "semantic-ui-react" 
+import {Grid,Button,Label,Segment, GridRow, GridColumn} from "semantic-ui-react" 
 let backendConnector = new BackendConnector()
 
 class Dropzone extends React.Component{
@@ -17,7 +17,6 @@ class Dropzone extends React.Component{
         this.state = {
           file: '',
           imagePreviewUrl: '',
-          pictureUploaded: true
         };
         this._handleImageChange = this._handleImageChange.bind(this);
         this._handleSubmit = this._handleSubmit.bind(this);
@@ -45,6 +44,7 @@ class Dropzone extends React.Component{
         
         reader.readAsDataURL(file)
       }
+
 
       async handleSubmit(){
         let fd = new FormData()
@@ -109,9 +109,13 @@ class Dropzone extends React.Component{
               <p className="DragAndDrop">{config.body.DragAndDrop}</p>
             </div>
 
-            <div>
-            <p className="BrowseFiles">...OR BROWSE FILES</p>
-          </div>
+            <Grid stackable centered>
+              <GridRow>
+                <GridColumn computer={8}><p className="BrowseFiles">...OR BROWSE FILES</p></GridColumn>
+                <GridColumn computer={8}><Button style={{marginTop:"22%", marginLeft:"50%"}}>Upload</Button></GridColumn>
+              </GridRow>
+            </Grid>
+                  
           </Segment>
 
           

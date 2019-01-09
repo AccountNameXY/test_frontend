@@ -14,7 +14,7 @@ import DecisionTree from "./components/decisionTree/decisionTree"
 import Header from "./components/header/header"
 import FlugzeugIdentifyer from "./components/flugzeugIdentifyer/flugzeugIdentifyer"
 import Bottom from "./components/bottom/bottom"
-import UploadDecision from "./components/uploadDecision/uploadDecision"
+import ShowPicture from "./components/showPicture/showPicture"
 
 
 import BackendConnector from "./backendConnector/backendConnector"
@@ -27,11 +27,16 @@ class App extends React.Component{
       super(props);
       this.props = props; 
       this.state={
-        showDropzone: true 
+        showDropzone: true,
+        submitted: false,  
+        pictureSelected: false,
+        pictureUploaded: false,
+        tagManually: false
       }
       this.config = config
       this.pictureSubmit = this.pictureSubmit.bind(this)
       this.responseHasData = this.responseHasData.bind(this)
+      this.changeSubmitBoolean = this.changeSubmitBoolean.bind(this)
   }
 
   async pictureSubmit(picture){
@@ -71,7 +76,48 @@ class App extends React.Component{
             this.state.response.images[0].classifiers[1].classes[0].class === "airplane")
             
   }
+  async changeSubmitBoolean(){
+    await this.setState({
+      submitted: true
+    })
+    console.log(this.state)
+  }
 
+  async setPictureUploadedFalse(){
+    await this.setState({
+      pictureUploaded: false
+    })
+  }
+
+async setPictureUploadedTrue(){
+  await this.setState({
+    pictureUploaded: true
+  })
+}
+
+async setPictureSelectedFalse(){
+  await this.setState({
+    pictureSelected: false
+  })
+}
+
+async setPictureSelectedTrue(){
+await this.setState({
+  pictureSelected: true
+})
+}
+
+async setTagManuallyFalse(){
+  await this.setState({
+    tagManually: false
+  })
+}
+
+async setTagManuallyTrue(){
+await this.setState({
+  tagManually: true
+})
+}
 
   
   render(){
@@ -91,16 +137,22 @@ class App extends React.Component{
             </Grid.Row>
             <Grid.Row>      
 
-            <Grid.Column computer={7}>
-               <UploadDecision />
+            <Grid.Column computer={7} style={{border:"2px white solid"}}>
+               <ShowPicture
+               /* Übergebene Variablen */ submitted={this.state.submitted} pictureSelected={this.state.pictureSelected} pictureUploaded={this.state.pictureUploaded} tagManually={this.state.tagManually} 
+               /* Übergebene Methoden */ setPictureSelectedFalse={this.setPictureSelectedFalse} setPictureSelectedTrue={this.setPictureSelectedTrue} changeSubmitBoolean={this.changeSubmitBoolean}/>
             </Grid.Column>
 
-            <Grid.Column computer={7}>
-              <DecisionTree data={this.config.decisionTree[0].Ebene1}/>
+            <Grid.Column computer={7} style={{border:"2px white solid"}}>
+              <DecisionTree data={this.config.decisionTree[0].Ebene1}  
+              /* Übergebene Variablen */ submitted={this.state.submitted} pictureSelected={this.state.pictureSelected} pictureUploaded={this.state.pictureUploaded} tagManually={this.state.tagManually}
+              /* Übergebene Methoden */ setPictureSelectedFalse={this.setPictureSelectedFalse} setPictureSelectedTrue={this.setPictureSelectedTrue} setPictureUploadedFalse={this.setPictureUploadedFalse} setPictureUploadedTrue={this.setPictureUploadedTrue} setTagManuallyFalse={this.setTagManuallyFalse} setTagManuallyTrue={this.setTagManuallyTrue}/>
             </Grid.Column> 
 
               <Grid.Column computer={10} centered>
-              <Dropzone pictureSubmit={this.pictureSubmit} />
+              <Dropzone pictureSubmit={this.pictureSubmit} 
+              /* Übergebene Variablen */ submitted={this.state.submitted} pictureSelected={this.state.pictureSelected} pictureUploaded={this.state.pictureUploaded} tagManually={this.state.tagManually}
+              /* Übergebene Methoden */ setPictureSelectedFalse={this.setPictureSelectedFalse} setPictureSelectedTrue={this.setPictureSelectedTrue} />
               <Bottom /> 
             
               {this.state.showDropzone ? 

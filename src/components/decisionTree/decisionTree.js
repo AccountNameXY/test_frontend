@@ -77,7 +77,7 @@ class DecisionTree extends Component{
     render(){
   
         return(
-            <Grid stackable centered style={{height:"600px", border:"2px white solid"}}>
+            <Grid stackable centered >
                 {this.hasData(this.props.data) ?
                     <Grid>
                         {/* <Grid.Row centered style={{marginTop:"20%"}}>

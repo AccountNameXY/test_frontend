@@ -31,7 +31,6 @@
     height: 100%
 }
 
-
 .DragDrop{
     margin-top: 5%;
 }
@@ -45,10 +44,14 @@
     color: white; 
     font-family: 'Nunito', sans-serif;
     font-size: 20px;
-    padding-top: 100px; 
+    padding-top: 100px;
     text-align: left; 
 }
 
 .BrowseFiles:hover{
     color: #F49E26; 
+}
+
+.PreviewUpload{
+    padding-top: 20%;
 }
