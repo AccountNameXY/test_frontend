@@ -86,7 +86,7 @@ config.decisionTree=[{
 config.header={
     titleMedialounge: "Media Lounge",
     titleLufthansaGroup: "Lufthansa Group",
-    uploadYourPic: "Upload your picture...",
+    uploadYourPic: "Upload your picture",
     logo: "./images/logo.png",
 }
 

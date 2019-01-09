@@ -143,7 +143,7 @@ class DecisionTree extends Component{
                 <Grid.Row centered style={{marginTop:"5%", marginBottom:"10%"}}>
                    
                         {this.state.stage == 4  ? 
-                             <Segment ><div style={{width:"50vw", height:"60 vh"}}>
+                             <Segment ><div style={{width:"50vw", height:"65 vh"}}>
                                 {this.state.finalTags.map(tag => {
                                     return (
                                     <Grid.Column computer={4} mobile={6} centered style={{marginTop:"3%"}}>
