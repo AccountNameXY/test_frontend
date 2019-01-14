@@ -15,12 +15,22 @@ class Header extends Component{
 
     render(){
         return( 
-            <Grid.Column desktop={12} > 
+            <Grid.Column computer={16} > 
+
                 <div className="mainHeader">
-                    <p className="titleMedialounge">{config.header.titleMedialounge}</p>
-                    <p className="titleLufthansaGroup">{config.header.titleLufthansaGroup}</p>
+                <Grid.Row style={{marginLeft:"0", marginRight:"0", height:"6.5em"}}>
+                    <Grid.Column computer={8} style={{marginLeft:"0", marginRight:"auto"}}>
+                        <p className="titleMedialounge">{config.header.titleMedialounge}</p>
+
+                    </Grid.Column>
+                    <Grid.Column computer={8} style={{marginLeft:"auto", marginRight:"0", paddingTop:"1.35em"}}>
+                        <p className="titleLufthansaGroup">{config.header.titleLufthansaGroup}</p>
+                    </Grid.Column>
+                </Grid.Row>
+                <Grid.Row style={{marginLeft:"0.1em", marginRight:"auto"}}>
                     <p className="uploadYourPic">{config.header.uploadYourPic}</p>
                     {/* <img className="mainLogo" src={config.header.logo} alt="" />  */}
+                </Grid.Row>
                 </div>
             </Grid.Column>
         )

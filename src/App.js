@@ -17,7 +17,6 @@ import ResultSection from "./components/resultSection/resultSection"
 
 import BackendConnector from "./backendConnector/backendConnector"
 
-
 let backendConnector = new BackendConnector()
 
 class App extends React.Component{
@@ -26,12 +25,24 @@ class App extends React.Component{
       super(props);
       this.props = props; 
       this.state={
+        showAddSectionBool:false,
+        selected: 0
       }
       this.config = config
       this.handleTagging = this.handleTagging.bind(this)
       this.handleImageChange = this.handleImageChange.bind(this)
       this.imageSelected = this.imageSelected.bind(this)
+      this.deleteTags = this.deleteTags.bind(this)
+      this.showAddSection = this.showAddSection.bind(this)
+      this.addTag = this.addTag.bind(this)
+      this.addTagsDecisionTree = this.addTagsDecisionTree.bind(this)
+      this.sendTags = this.sendTags.bind(this)
   }
+
+  onSelect = key => {
+    this.setState({ selected: key });
+  }
+ 
 
   async handleImageChange(input){
     let data =[]
@@ -41,13 +52,37 @@ class App extends React.Component{
       let newObject ={ } 
       newObject.url = URL.createObjectURL(item)
       newObject.file = item
+      newObject.pictureIndex = index
       data.push(newObject)
     })
 
+    data.map((item,index) => {
+        if(index === 0){
+          data[index].selected = true
+        }else{
+          data[index].selected = false
+        }
+      })
+    
     await this.setState({
       data: data
     }) 
     
+  }
+
+  async addTag(pictureIndex, value){
+    let data = {...this.state.data}
+      data = Object.values(data)
+      data.map((item,index) =>{
+        if(index === pictureIndex){
+          console.log(data[pictureIndex].tags)
+          data[pictureIndex].tags.push(value)
+        }
+      })
+      
+      await this.setState({
+        data: data
+      })
   }
 
   async handleTagging(){
@@ -68,13 +103,8 @@ class App extends React.Component{
           })
           .then(function(response) {
             data[index].tags = response.tags
-            if(index === 0){
-              data[index].selected = true
-            }else{
-              data[index].selected = false
-            }
           });
-          console.log(this.state.data)
+          // console.log(this.state.data)
         })
 
         await this.setState({
@@ -84,40 +114,106 @@ class App extends React.Component{
 
   async imageSelected(selectedIndex){
     let data = {...this.state.data}
+    let bigPicture
     data = Object.values(data)
     data.map((item,index) => {
       if(selectedIndex === index){
         data[index].selected = true
+        bigPicture = data[index]
       }else{
         data[index].selected = false
       }
     })
     await this.setState({
-      data: data
+      data: data,
+      bigPicture: bigPicture,
+      showAddSectionBool: false 
     })
+  }
+
+  async deleteTags(pictureIndex,tagIndex){
+      let data = {...this.state.data}
+      data = Object.values(data)
+      data[pictureIndex].tags.map((item,index) =>{
+        if(index === tagIndex){
+          data[pictureIndex].tags.splice(index, 1)
+        }
+      })
+      
+      await this.setState({
+        data: data
+      })
+  }
+
+  async showAddSection(pictureIndex){
+
+    await this.setState({
+      showAddSectionBool: true
+    })
+  }
+
+  async addTagsDecisionTree(tags, pictureIndex){
+    let data = {...this.state.data}
+    data = Object.values(data)
+    tags.map((item,index)=> {
+      data[pictureIndex].tags.push(item)   
+    })
+     
+    this.setState({
+      data: data 
+    })
+  }
+
+  sendTags(){
+    let data =[]
+    this.state.data.map((item,index)=>{
+      let pushItem= {
+        name: item.file.name,
+        tags: []
+      }
+      data.push(pushItem)
+      item.tags.map((tag,tagIndex)=>{
+        data[index].tags.push(tag)
+      })
+      
+    })
+    
+    fetch("http://localhost:8081/download", {
+            // mode: 'no-cors',
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              // "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: JSON.stringify(data)
+          })
   }
   
   render(){
+
       return(
           <Grid className={"App"}  centered>
             <Grid.Row centered>
               <Header />
             </Grid.Row>
             <Grid.Row>
-              <Uploader handleImageChange={this.handleImageChange} handleTagging={this.handleTagging}/> 
+              <Uploader handleImageChange={this.handleImageChange} imageSelected={this.imageSelected} 
+                        handleTagging={this.handleTagging} data={this.state.data} bigPicture={this.state.bigPicture}/> 
             </Grid.Row> 
             <Grid.Row>
               <Grid.Column computer={8} >
-                <ImagePreview images={this.state.data} imageSelected={this.imageSelected}/> 
+                {/* <ImagePreview images={this.state.data} />  */}
               </Grid.Column>
               <Grid.Column computer={8} >
                 {this.state.data !== undefined && this.state.data !== null ? 
-                  <ResultSection data={this.state.data}/> 
+                  <ResultSection data={this.state.data} deleteTags={this.deleteTags} showAddSectionBool={this.state.showAddSectionBool}
+                    showAddSection={this.showAddSection} bigPicture={this.state.bigPicture} addTag={this.addTag} addTagsDecisionTree={this.addTagsDecisionTree}/> 
                 :null
                 }
-                
               </Grid.Column>
             </Grid.Row>
+
+            <Button onClick={this.sendTags}>Send Tagged Pictures</Button> 
           </Grid> 
       )
   }

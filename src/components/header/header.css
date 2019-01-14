@@ -1,61 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:200,900');
+
 .mainHeader{
-    width: 90em; 
-    height: 15em;
-    background-color: white;
-    margin-left: auto; 
-    margin-right: auto;
-    padding-left: 100%;
+    background: white;
+    height: 14em;
 }
 
 .titleMedialounge{
     color: #001F52; 
     font-size: 7em;
     font-family: 'Nunito', sans-serif;
-    font-weight: lighter;
-    width: 99.5%;
-    position: absolute;
-    /* left: 25%; */
-    transform: translateX(-98%);
-    margin-top: 0.5em !important;
+    font-style: normal;
+    font-weight: 200;
     text-transform: uppercase;
-    /* top: 50%;
-    transform: translateY(-50%) */
+    padding-left: 0.1em;
 }
 
 .titleLufthansaGroup{
     color: #001F52; 
-    font-size: 35px;
-    font-family: Arial;
-    font-weight: bolder;
-    position: absolute;
-    width: 25%;
-    /* left: 90%; */
-    transform: translateX(-100%);
-    margin-top: 0.25em !important;
-    text-transform: uppercase; 
-    /* top: 50%;
-    transform: translateY(-50%) */
+    font-size: 2em;
+    padding-right: 0.3em;
+    font-family: Arial, sans-serif;
+    font-weight: 750;
+    text-transform: uppercase;
 }
 
+/*Tag your images*/
 .uploadYourPic{
-    color: #001F52; 
-    font-size: 1.2em;
+     color: #001F52; 
+    font-size: 1.75em;
     font-family: 'Nunito', sans-serif; 
     font-weight: lighter;
-    position: absolute;
-    width: 99%;
-    /* left: 14.1%; */
-    top: 80%;
-    transform: translateX(-98%);
-    margin-top: 0.25em !important;
-    text-transform: uppercase;
-    /* top: 50%;
-    transform: translateY(-50%) */
+    padding-left: 0.6em;
+    padding-top: 1.7em;
 }
-
+/*
 .mainLogo{
     width: 5em; 
     height: 2em;
     color: white;
 }
-
+*/
