@@ -3,12 +3,13 @@ const config={}
 config.decisionTree=[
     { 
         name:"Vorstand",
-        member:[    
+        member:[
+            {name: "Dr. Bettina Volkens"},    
             {name: "Carsten Spohr"},
             {name: "Thorsten Dirks"},
             {name: "Harry Hohmeister"},
             {name: "Ulrik Svensson"},
-            {name: "Dr. Bettina Volkens"},
+            
             {name: "Dr. Detlef Kayser"}
         ],
     },

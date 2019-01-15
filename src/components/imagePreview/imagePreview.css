@@ -69,20 +69,37 @@
     margin: 10px;
     display: inline-block;
     line-height: 100px; 
-  }
+  }*/
 
   .choosenBigPictureDiv{
-      text-align: center; 
-      width: 74%;
+      text-align: center;
+      margin-top:auto;
+      margin-bottom: auto;
+      /* width: 70vw; */
+      min-height: 50vh;
   }
 
-  .choosenBigPicture{
-      width: 30em;
-  } */
+  .ui.white.tag.label.setLabel{
+    margin-left: 25px
+  }
+
+  .chosenBigPicture{
+      margin-right: auto;
+      margin-left: auto;
+      max-height: 40vh;
+  } 
+
+  .chosenBigPicture.small{
+    margin-right: 0px;
+    margin-left: auto;
+    max-height: 30vh;
+    max-width: 25vw;
+
+} 
 
   .main {
     text-align: center;
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -92,15 +109,11 @@
    font-size: 42px;
   }
 
-  .choosenBigPicture{
-    max-height: 200px;
-    max-width: 200px
-  }
   
   
   .image {
-    height: 100px;
-    width: 100px;
+    max-height: 30vh;
+    /* width: 10vm; */
     font-size: 25px;
     margin: 10px;
     display: inline-block;
@@ -108,8 +121,7 @@
   }
 
   .imagePreview{
-      max-height: 100px;
-      max-width: 100px
+      max-height: 10vh;
   }
   
   
@@ -119,7 +131,7 @@
     white-space: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
-    width: 50%;
+    width: 30vw;
   }
   
   .prev, .next {
@@ -132,7 +144,7 @@
   }
   
   .next {
-    margin-left: 5px;
+    margin-left: 8px;
   }
   
   .prev {

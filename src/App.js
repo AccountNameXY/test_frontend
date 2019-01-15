@@ -12,7 +12,7 @@ import config from "./config"
 import ImagePreview from "./components/imagePreview/imagePreview"
 import Uploader from "./components/uploader/uploader"
 import Header from "./components/header/header"
-import ResultSection from "./components/resultSection/resultSection"
+import TagHandler from "./components/tagHandler/tagHandler"
 
 
 import BackendConnector from "./backendConnector/backendConnector"
@@ -25,7 +25,7 @@ class App extends React.Component{
       super(props);
       this.props = props; 
       this.state={
-        showAddSectionBool:false,
+        showTagHanler:false,
         selected: 0
       }
       this.config = config
@@ -33,7 +33,7 @@ class App extends React.Component{
       this.handleImageChange = this.handleImageChange.bind(this)
       this.imageSelected = this.imageSelected.bind(this)
       this.deleteTags = this.deleteTags.bind(this)
-      this.showAddSection = this.showAddSection.bind(this)
+      this.openTagHandler = this.openTagHandler.bind(this)
       this.addTag = this.addTag.bind(this)
       this.addTagsDecisionTree = this.addTagsDecisionTree.bind(this)
       this.sendTags = this.sendTags.bind(this)
@@ -55,17 +55,20 @@ class App extends React.Component{
       newObject.pictureIndex = index
       data.push(newObject)
     })
-
+    let bigPicture
     data.map((item,index) => {
         if(index === 0){
           data[index].selected = true
+          bigPicture = data[index]
         }else{
           data[index].selected = false
         }
       })
     
     await this.setState({
-      data: data
+      data: data,
+      bigPicture: bigPicture,
+      showTagHandler: false
     }) 
     
   }
@@ -164,57 +167,94 @@ class App extends React.Component{
     })
   }
 
-  sendTags(){
-    let data =[]
-    this.state.data.map((item,index)=>{
-      let pushItem= {
-        name: item.file.name,
-        tags: []
-      }
-      data.push(pushItem)
-      item.tags.map((tag,tagIndex)=>{
-        data[index].tags.push(tag)
-      })
-      
-    })
+  sendTags(event){
+
+    event.preventDefault()
+    console.log(event.target.value)
+    // let data =[]
+    // let fd = new FormData()
+    // this.state.data.map((item,index)=>{
+    //   let pushItem= {
+    //     name: item.file.name,
+    //     tags: []
+    //   }
+    //   data.push(pushItem)
+    //   item.tags.map((tag,tagIndex)=>{
+    //     data[index].tags.push(tag)
+    //   })
+    //   fd.append("data",JSON.stringify(data))
+    // })
     
-    fetch("http://localhost:8081/download", {
-            // mode: 'no-cors',
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              // "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: JSON.stringify(data)
-          })
+    // fetch("http://localhost:8081/download", {
+    //         // mode: 'no-cors',
+    //         method: "POST",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //           // "Content-Type": "application/x-www-form-urlencoded",
+    //         },
+    //         body: fd
+    //       })
+  }
+
+  openTagHandler(){
+    this.setState({
+      showTagHandler: true
+    })
+  }
+
+  hasData(input){
+    return  input !== undefined &&
+            input !== null 
   }
   
   render(){
-
+    console.log(this.state.bigPicture)
       return(
-          <Grid className={"App"}  centered>
+          <Grid className={"App"}  >
             <Grid.Row centered>
               <Header />
             </Grid.Row>
-            <Grid.Row>
-              <Uploader handleImageChange={this.handleImageChange} imageSelected={this.imageSelected} 
-                        handleTagging={this.handleTagging} data={this.state.data} bigPicture={this.state.bigPicture}/> 
+            <Grid.Row centered>
+              <Uploader handleImageChange={this.handleImageChange} /*imageSelected={this.imageSelected} 
+                        handleTagging={this.handleTagging} data={this.state.data} bigPicture={this.state.bigPicture}*//> 
             </Grid.Row> 
-            <Grid.Row>
-              <Grid.Column computer={8} >
-                {/* <ImagePreview images={this.state.data} />  */}
-              </Grid.Column>
-              <Grid.Column computer={8} >
-                {this.state.data !== undefined && this.state.data !== null ? 
-                  <ResultSection data={this.state.data} deleteTags={this.deleteTags} showAddSectionBool={this.state.showAddSectionBool}
-                    showAddSection={this.showAddSection} bigPicture={this.state.bigPicture} addTag={this.addTag} addTagsDecisionTree={this.addTagsDecisionTree}/> 
+            {this.hasData(this.state.data) ?
+              <Grid.Row centered> 
+                <Button onClick={this.handleTagging}>Tag your Images</Button>
+              </Grid.Row>
+            :
+              null
+            }
+            <Grid.Row centered>
+                {this.hasData(this.state.data) ?
+                  <ImagePreview data={this.state.data} showTagHandler={this.state.showTagHandler} openTagHandler={this.openTagHandler} imageSelected={this.imageSelected} deleteTags={this.deleteTags} bigPicture={this.state.bigPicture}>
+                    <TagHandler  bigPicture={this.state.bigPicture} addTag={this.addTag} addTagsDecisionTree={this.addTagsDecisionTree}/>
+                  </ImagePreview> 
                 :null
                 }
-              </Grid.Column>
+              {/* </Grid.Column> */}
             </Grid.Row>
+            {/* <Grid.Column computer={8} >
+              {this.state.data !== undefined && this.state.data !== null ? 
+                <TagHandler data={this.state.data} deleteTags={this.deleteTags} showAddSectionBool={this.state.showAddSectionBool}
+                  showAddSection={this.showAddSection} bigPicture={this.state.bigPicture} addTag={this.addTag} addTagsDecisionTree={this.addTagsDecisionTree}/> 
+              :null
+              }
+            </Grid.Column> */}
+           
+          <Grid.Row centered>
+          
+            <form /*action="/download" method="post" */ onSubmit={this.sendTags}>
+              <label>
+                <input /> 
+              </label>
+                <input type="submit" value="Submit"/*onClick={this.sendTags}*/ />
+          </form>
+          </Grid.Row>
 
-            <Button onClick={this.sendTags}>Send Tagged Pictures</Button> 
-          </Grid> 
+          
+
+        </Grid> 
       )
   }
 }
