@@ -30,14 +30,14 @@ class TagHandler extends Component{
 
     render(){
         return(
-            <div className="resultSection">
+            <div className="resultSection" style={{marginLeft:"5%"}}>
                 <Grid>
                     <Grid.Row >
                         <Header>Add your Own Tag...</Header>
                     </Grid.Row>
                     <Grid.Row  style={{marginTop:"2%"}}>
                         <Input  value={this.state.value} onChange={this.handleChange} placeholder='Search...' />
-                        <Button style={{marginLeft:"5%"}} onClick={() => this.addTag(this.props.bigPicture.pictureIndex)}>Add Tags</Button>
+                        <Button basic style={{marginLeft:"5%"}} onClick={() => this.addTag(this.props.bigPicture.pictureIndex)}>Add Tags</Button>
                     </Grid.Row>
                     <Grid.Row style={{marginTop:"2%"}}>
                     </Grid.Row>

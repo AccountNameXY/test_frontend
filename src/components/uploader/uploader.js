@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Grid,Button,Segment,Label} from "semantic-ui-react"
+import {Grid,Button,Segment,Label,Icon} from "semantic-ui-react"
 import config from "./../../config"
 import "./uploader.css"
 import classNames from 'classnames'
@@ -18,7 +18,7 @@ class Uploader extends Component{
     onDrop = (acceptedFiles, rejectedFiles) => {
         this.props.handleImageChange(acceptedFiles)
       }
-      
+
     handleTagging(){
         this.props.handleTagging()
     }
@@ -26,23 +26,26 @@ class Uploader extends Component{
 
     render(){
         return(
-            <Dropzone onDrop={this.onDrop}>
-                {({getRootProps, getInputProps, isDragActive}) => {
-                return (
-                    <div
-                    {...getRootProps()}
-                    className={classNames('dropzone', {'dropzone--isActive': isDragActive})}
-                    >
-                    <input {...getInputProps()} />
-                    {
-                        isDragActive ?
-                        <p>Drop files here...</p> :
-                        <p>Try dropping some files here, or click to select files to upload.</p>
-                    }
-                    </div>
-                )
-                }}
-            </Dropzone>
+            <div className="dropZoneBorder">
+                <Icon name="add square" size="huge" /> 
+                <Dropzone onDrop={this.onDrop}>
+                    {({getRootProps, getInputProps, isDragActive}) => {
+                    return (
+                        <div
+                        {...getRootProps()}
+                        className={classNames('dropzone', {'dropzone--isActive': isDragActive})}
+                        >
+                        <input {...getInputProps()} />
+                        {
+                            isDragActive ?
+                            <p>Drop files here...</p> :
+                            <p>Try dropping some files here, or click to select files to upload.</p>
+                        }
+                        </div>
+                    )
+                    }}
+                </Dropzone>
+            </div>
         )
     }
 }

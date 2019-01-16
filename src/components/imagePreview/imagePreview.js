@@ -50,20 +50,33 @@ class ImagePreview extends Component {
           return classNames.join(" ")
       }
 
+      generateClassNameBigPic(){
+        let classNames =[]
+        classNames.push("chosenBigPictureDiv")
+        if(this.props.showTagHandler){
+            classNames.push("small")
+        }
+        return classNames.join(" ")
+    }
+
     render(){
         return(
             // <div>
-                <Grid>
-                    <Grid.Row>
-                        <Grid.Column computer={this.props.showTagHandler ? 7 : 16} style={{marginLeft:"5%"}}>
+               
+                <Grid> 
+                   
+                    <Grid.Row centered>
+                         
+                        <Grid.Column computer={this.props.showTagHandler ? 7 : 16} style={{marginLeft:"0px"}}>
+                        <Segment>
                             {this.props.bigPicture !== undefined ?
-                                <div className="choosenBigPictureDiv">
+                                <div className={this.generateClassNameBigPic()}>
                                     <Grid>
                                         <Grid.Row centered>
                                             
                                             {this.hasData(this.props.bigPicture.tags) ?
 
-                                                <Grid.Column computer={this.hasData(this.props.bigPicture.tags) ? 11 : 16}>
+                                                <Grid.Column computer={this.hasData(this.props.bigPicture.tags) ? 8 : 16}>
                                                     <Grid.Row>
                                                         <img className={this.generateClassName()} src={this.props.bigPicture.url} />
                                                     </Grid.Row>
@@ -80,11 +93,11 @@ class ImagePreview extends Component {
                                             
                                             
                                                 {this.hasData(this.props.bigPicture.tags) ?
-                                                    <Grid.Column computer={5}>
+                                                    <Grid.Column computer={8}>
                                                         {this.props.bigPicture.tags.map((item, tagIndex) => {
                                                             return(
-                                                                <Grid.Row style={{marginTop:"2%"}}>
-                                                                    <Label className="setLabel" as='a' color='white' tag>
+                                                                <Grid.Row style={{marginTop:"1%", marginLeft:"1px"}}>
+                                                                    <Label /*className="setLabel" as='a'*/ basic color='white' pointing={"left"}>
                                                                         {item}
                                                                         <Icon name='delete' onClick={() => this.deleteTags(tagIndex,this.props.bigPicture.pictureIndex)}/>
                                                                     </Label>   
@@ -99,32 +112,46 @@ class ImagePreview extends Component {
                             :
                                 <p>Select a Picture to see Tags </p>
                             }
-                            <button onClick={this.openTaghandler}>Tag Images Manually</button>
-                            <div className="main">
-                                <div className="wrapper">
-                                    <a className="prev" onClick={this.scroll.bind(null,-1)}>&#10094;</a>
-                                    
-                                    <div className="image-container">
-                                        {this.props.data.map((item, index) => {
-                                            return(
-                                                <div className="image">
-                                                    <img className="imagePreview" src={item.url} onClick={() => this.imageSelected(index)}/>
+                            <Grid>
+                                <Grid.Row centered>
+                                        <div className="main">
+                                            <div className="wrapper">
+                                            <Segment secondary>
+                                                <a className="prev" onClick={this.scroll.bind(null,-1)}>&#10094;</a>
+                                                
+                                                <div className="image-container">
+                                                    
+                                                    {this.props.data.map((item, index) => {
+                                                        return(
+                                                            <div className="image">
+                                                                <img className="imagePreview" src={item.url} onClick={() => this.imageSelected(index)}/>
+                                                            </div>
+                                                            // <div className="innerContainer" ><img className="imagePreview" /* src={item.url} */ src={item.url} onClick={() => this.imageSelected(index)}/></div>
+                                                        )
+                                                    })}
+                                                    
                                                 </div>
-                                                // <div className="innerContainer" ><img className="imagePreview" /* src={item.url} */ src={item.url} onClick={() => this.imageSelected(index)}/></div>
-                                            )
-                                        })}
-                                    </div>
-                                    <a className="next" onClick={this.scroll.bind(null,1)}>&#10095;</a>
-                                </div>
-                            </div>
+                                                
+                                                <a className="next" onClick={this.scroll.bind(null,1)}>&#10095;</a>
+                                                </Segment>
+                                            </div>
+                                        </div>
+                                </Grid.Row>
+                            </Grid>
+                            
+                        </Segment>
                         </Grid.Column>
-
+                        
+                                            
                         {this.props.showTagHandler ? 
-                            <Grid.Column computer={8}>
+                            <Grid.Column computer={7}>
+                                <Segment>
                                 {this.props.children }
+                                </Segment>
                                 {/* <img src={this.props.bigPicture.url} />  */}
                             </Grid.Column>
                         : null }
+                        
                         </Grid.Row>
                     </Grid>
             // </div>

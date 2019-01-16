@@ -90,7 +90,9 @@ class App extends React.Component{
 
   async handleTagging(){
     let data = {...this.state.data}
-    this.state.data.map((item, index)=>{
+    let dataToMap = {...this.state.data}
+    dataToMap = Object.values(dataToMap)
+    dataToMap.map((item, index)=>{
           let fd = new FormData()
           fd.append("image", item.file)
           fetch("http://localhost:8081/classify", {
@@ -113,6 +115,14 @@ class App extends React.Component{
         await this.setState({
           data: Object.values(data)
         })
+        this.update()
+  }
+
+  update(){
+    console.log("HUhuhu")
+    this.setState({
+      state: this.state
+    })
   }
 
   async imageSelected(selectedIndex){
@@ -171,29 +181,37 @@ class App extends React.Component{
 
     event.preventDefault()
     console.log(event.target.value)
-    // let data =[]
-    // let fd = new FormData()
-    // this.state.data.map((item,index)=>{
-    //   let pushItem= {
-    //     name: item.file.name,
-    //     tags: []
-    //   }
-    //   data.push(pushItem)
-    //   item.tags.map((tag,tagIndex)=>{
-    //     data[index].tags.push(tag)
-    //   })
-    //   fd.append("data",JSON.stringify(data))
-    // })
-    
-    // fetch("http://localhost:8081/download", {
-    //         // mode: 'no-cors',
-    //         method: "POST",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //           // "Content-Type": "application/x-www-form-urlencoded",
-    //         },
-    //         body: fd
-    //       })
+    let data =[]
+    this.state.data.map((item,index)=>{
+      let pushItem= {
+        name: item.file.name,
+        tags: []
+      }
+      data.push(pushItem)
+      item.tags.map((tag,tagIndex)=>{
+        data[index].tags.push(tag)
+      })
+    })
+
+    let response
+    fetch("http://localhost:8081/tag", {
+            // mode: 'no-cors',
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              // "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: JSON.stringify(data)
+        }).then(function(response) {
+            if (response.ok){
+                return response.json()//console.log(response.json())
+            //window.location = "http://localhost:8081/download/" + JSON.stringify(response.text())
+        }
+    }).then(function(response) {
+        window.location = "http://localhost:8081/download/" + response.filename
+    })
+
+  
   }
 
   openTagHandler(){
@@ -208,7 +226,7 @@ class App extends React.Component{
   }
   
   render(){
-    console.log(this.state.bigPicture)
+    console.log(this.state.data)
       return(
           <Grid className={"App"}  >
             <Grid.Row centered>
@@ -219,8 +237,17 @@ class App extends React.Component{
                         handleTagging={this.handleTagging} data={this.state.data} bigPicture={this.state.bigPicture}*//> 
             </Grid.Row> 
             {this.hasData(this.state.data) ?
-              <Grid.Row centered> 
-                <Button onClick={this.handleTagging}>Tag your Images</Button>
+              <Grid.Row centered>
+        
+                  <Button basic className="mainButton" onClick={this.handleTagging}>Tag your Images</Button>
+                {this.hasData(this.state.data[0].tags) ?
+                  <Button className="mainButton" basic onClick={this.openTagHandler}>Tag Images Manually</Button>
+                  
+                  :null
+                }
+                {this.hasData(this.state.data[0].tags)? 
+                  <Button className="mainButton" basic onClick={this.sendTags}>Download Tagged Images</Button>
+                :null}
               </Grid.Row>
             :
               null
@@ -242,14 +269,13 @@ class App extends React.Component{
               }
             </Grid.Column> */}
            
-          <Grid.Row centered>
-          
-            <form /*action="/download" method="post" */ onSubmit={this.sendTags}>
+          <Grid.Row centered>          
+            {/* <form  onSubmit={this.sendTags}>
               <label>
-                <input /> 
-              </label>
-                <input type="submit" value="Submit"/*onClick={this.sendTags}*/ />
-          </form>
+               <input /> 
+             </label>
+              <input type="submit" value="Submit" />
+        </form> */}
           </Grid.Row>
 
           

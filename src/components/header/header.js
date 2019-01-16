@@ -15,9 +15,9 @@ class Header extends Component{
 
     render(){
         return( 
-            <Grid.Column computer={16} > 
-
-                <div className="mainHeader">
+            
+                        
+            <div className="mainHeader">
                 <Grid.Row style={{marginLeft:"0", marginRight:"0", height:"6.5em"}}>
                     <Grid.Column computer={8} style={{marginLeft:"0", marginRight:"auto"}}>
                         <p className="titleMedialounge">{config.header.titleMedialounge}</p>
@@ -31,8 +31,9 @@ class Header extends Component{
                     <p className="uploadYourPic">{config.header.uploadYourPic}</p>
                     {/* <img className="mainLogo" src={config.header.logo} alt="" />  */}
                 </Grid.Row>
-                </div>
-            </Grid.Column>
+            </div> 
+
+                    
         )
     }
 }

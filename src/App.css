@@ -2,6 +2,11 @@
   background: #001F52 !important;
 }
 
+.ui.basic.button.mainButton{
+  margin-left:auto; 
+  margin-right: auto
+}
+
 .mainHeaderText{
   color: white !important
 }
@@ -10,7 +15,12 @@
 }
 
 .ui.grid{
-  margin-left:0px !important
+  margin-left:0px !important;
+  margin-right:0px!important
+}
+.row{
+  margin-left:0px !important;
+  margin-right: 0px !important
 }
 /* .body{
   background: linear-gradient(#dcdcdc, #B1B1B1) !important
