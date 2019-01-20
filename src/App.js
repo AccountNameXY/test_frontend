@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 //SemanticUI
-import { Image,Icon,Segment,Button,Grid,Input,Label,Message } from 'semantic-ui-react'; 
+import { Image,Icon,Segment,Button as ButtonSemanticUI,Grid,Input,Label,Message } from 'semantic-ui-react'; 
 import 'semantic-ui-css/semantic.min.css'
 
 //config
@@ -13,6 +13,9 @@ import ImagePreview from "./components/imagePreview/imagePreview"
 import Uploader from "./components/uploader/uploader"
 import Header from "./components/header/header"
 import TagHandler from "./components/tagHandler/tagHandler"
+
+//UI
+import Button from "./components/ui/button/button"
 
 
 import BackendConnector from "./backendConnector/backendConnector"
@@ -78,7 +81,6 @@ class App extends React.Component{
       data = Object.values(data)
       data.map((item,index) =>{
         if(index === pictureIndex){
-          console.log(data[pictureIndex].tags)
           data[pictureIndex].tags.push(value)
         }
       })
@@ -96,7 +98,6 @@ class App extends React.Component{
           let fd = new FormData()
           fd.append("image", item.file)
           fetch("http://localhost:8081/classify", {
-            // mode: 'no-cors',
             method: "POST",
             body: fd
           })
@@ -109,7 +110,6 @@ class App extends React.Component{
           .then(function(response) {
             data[index].tags = response.tags
           });
-          // console.log(this.state.data)
         })
 
         await this.setState({
@@ -119,7 +119,6 @@ class App extends React.Component{
   }
 
   update(){
-    console.log("HUhuhu")
     this.setState({
       state: this.state
     })
@@ -224,7 +223,10 @@ class App extends React.Component{
     return  input !== undefined &&
             input !== null 
   }
-  
+
+  testClick(){
+    alert("Dies ist ein Test")
+  }  
   render(){
     console.log(this.state.data)
       return(
@@ -233,20 +235,19 @@ class App extends React.Component{
               <Header />
             </Grid.Row>
             <Grid.Row centered>
-              <Uploader handleImageChange={this.handleImageChange} /*imageSelected={this.imageSelected} 
-                        handleTagging={this.handleTagging} data={this.state.data} bigPicture={this.state.bigPicture}*//> 
+              <Uploader handleImageChange={this.handleImageChange}/> 
             </Grid.Row> 
             {this.hasData(this.state.data) ?
               <Grid.Row centered>
-        
-                  <Button basic className="mainButton" onClick={this.handleTagging}>Tag your Images</Button>
+                  <Button title="TestButton" clickHAndler={this.testClick}/>
+                  <ButtonSemanticUI basic className="mainButton" onClick={this.handleTagging}>Tag your Images</ButtonSemanticUI>
                 {this.hasData(this.state.data[0].tags) ?
-                  <Button className="mainButton" basic onClick={this.openTagHandler}>Tag Images Manually</Button>
+                  <ButtonSemanticUI className="mainButton" basic onClick={this.openTagHandler}>Tag Images Manually</ButtonSemanticUI>
                   
                   :null
                 }
                 {this.hasData(this.state.data[0].tags)? 
-                  <Button className="mainButton" basic onClick={this.sendTags}>Download Tagged Images</Button>
+                  <ButtonSemanticUI className="mainButton" basic onClick={this.sendTags}>Download Tagged Images</ButtonSemanticUI>
                 :null}
               </Grid.Row>
             :
@@ -259,28 +260,14 @@ class App extends React.Component{
                   </ImagePreview> 
                 :null
                 }
-              {/* </Grid.Column> */}
             </Grid.Row>
-            {/* <Grid.Column computer={8} >
-              {this.state.data !== undefined && this.state.data !== null ? 
-                <TagHandler data={this.state.data} deleteTags={this.deleteTags} showAddSectionBool={this.state.showAddSectionBool}
-                  showAddSection={this.showAddSection} bigPicture={this.state.bigPicture} addTag={this.addTag} addTagsDecisionTree={this.addTagsDecisionTree}/> 
-              :null
-              }
-            </Grid.Column> */}
            
-          <Grid.Row centered>          
-            {/* <form  onSubmit={this.sendTags}>
-              <label>
-               <input /> 
-             </label>
-              <input type="submit" value="Submit" />
-        </form> */}
-          </Grid.Row>
+          <Grid.Row centered>   
+        </Grid.Row>
 
           
 
-        </Grid> 
+      </Grid> 
       )
   }
 }
