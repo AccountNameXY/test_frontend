@@ -1,31 +1,29 @@
-import React, {Component} from 'react';
-import {Grid,Button,Segment,Label,Icon} from "semantic-ui-react"
-import config from "./../../config"
+import React, { Component } from 'react';
+import { Icon } from "semantic-ui-react"
 import "./uploader.css"
 import classNames from 'classnames'
 import Dropzone from 'react-dropzone'
 
-class Uploader extends Component{
-    constructor(props){
+class Uploader extends Component {
+    constructor(props) {
         super(props)
         this.props = props
-        this.state ={
+        this.state = {
         }
-        // this.handleImageChange = this.handleImageChange.bind(this)
         this.handleTagging = this.handleTagging.bind(this)
     }
 
     onDrop = (acceptedFiles, rejectedFiles) => {
         this.props.handleImageChange(acceptedFiles)
-      }
+    }
 
-    handleTagging(){
+    handleTagging() {
         this.props.handleTagging()
     }
 
 
-    render(){
-        return(
+    render() {
+        return (
             <div className="dropZoneBorder">
                {/* <Icon name="add square" size="huge" /> */}
                 <Dropzone onDrop={this.onDrop}>
@@ -49,7 +47,7 @@ class Uploader extends Component{
         )
     }
 }
-    
+
 
 
 export default Uploader

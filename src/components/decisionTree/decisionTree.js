@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import {Button,Grid,Label} from 'semantic-ui-react'
+import { Button, Grid } from 'semantic-ui-react'
 import config from "./../../config"
 
-class DecisionTree extends Component{
-    constructor(props){
+class DecisionTree extends Component {
+    constructor(props) {
         super(props)
         this.props = props
-        this.state={
+        this.state = {
             tree: config.decisionTree,
             Ebene2Bool: false,
-            Ebene3Bool:false,
-            chosenTags:[]
+            Ebene3Bool: false,
+            chosenTags: []
         }
         this.handleEbene2 = this.handleEbene2.bind(this)
         this.handleEbene1 = this.handleEbene1.bind(this)
@@ -18,147 +18,120 @@ class DecisionTree extends Component{
         this.addTag = this.addTag.bind(this)
     }
 
-    handleEbene1(event){
+    async handleEbene1(event) {
         let Ebene2
-        this.state.tree.map((item,index)=>{
-            if(item.name === event.target.value){
+        this.state.tree.map((item, index) => {
+            if (item.name === event.target.value) {
                 Ebene2 = item.member
-                
             }
         })
         let chosenTags = []
         chosenTags.push(event.target.value)
 
-        this.setState({
+        await this.setState({
             Ebene2: Ebene2,
-            Ebene2Bool:true,
+            Ebene2Bool: true,
             Ebene3Bool: false,
             chosenTags: chosenTags
         })
+        this.props.addTag(this.state.chosenTags)
     }
 
-    handleEbene2(event){
+    async handleEbene2(event) {
         let Ebene3
-        if(this.state.Ebene2[0].member !== undefined){
-            this.state.Ebene2.map((item,index)=>{
-                if(item.name === event.target.value){
+        if (this.state.Ebene2[0].member !== undefined) {
+            this.state.Ebene2.map((item, index) => {
+                if (item.name === event.target.value) {
                     Ebene3 = item.member
                 }
             })
             this.setState({
                 Ebene3: Ebene3,
-                Ebene3Bool:true
+                Ebene3Bool: true
             })
         }
-        let chosenTags = {...this.state.chosenTags}
-        chosenTags= Object.values(chosenTags)
-        
+        let chosenTags = [...this.state.chosenTags]
+
         chosenTags[1] = event.target.value
-        if(chosenTags[2] !== undefined){
-            chosenTags.splice(2,1)
+        if (chosenTags[2] !== undefined) {
+            chosenTags.splice(2, 1)
         }
-        this.setState({
-            chosenTags:chosenTags
+        await this.setState({
+            chosenTags: chosenTags
         })
+        this.props.addTag(this.state.chosenTags)
     }
 
-    handleEbene3(event){
-        let chosenTags = {...this.state.chosenTags}
-        chosenTags = Object.values(chosenTags)
+    async handleEbene3(event) {
+        let chosenTags = [...this.state.chosenTags]
         chosenTags[2] = event.target.value
-        this.setState({
-            chosenTags:chosenTags
+        await this.setState({
+            chosenTags: chosenTags
         })
+        this.props.addTag(this.state.chosenTags)
+
     }
 
-    generateClasses(){
+    generateClasses() {
         return null
     }
 
-    addTag(){
+    addTag() {
         console.log(this.props)
-        this.props.addTag(this.state.chosenTags,this.props.pictureId)
+        this.props.addTag(this.state.chosenTags, this.props.pictureId)
     }
-    
 
-    render(){
-        return(
+
+    render() {
+        return (
             <div>
                 <Grid>
-                <Grid.Row>
-                    {this.state.chosenTags.length !== 0 && this.state.chosenTags !== null ? 
-                        this.state.chosenTags.map((item,index) => {
-                            return(
-                                <Grid.Column computer={4} /*style={{marginleft:"5%"}}*/>
-                                <Label as='a' color='red' tag>
-                                    {item}
-                                </Label>
-                                </Grid.Column>
-                            )
-                        })
-                        
-                        
-                    :
-                        null
-                    }
-                    {this.state.chosenTags.length !== 0 && this.state.chosenTags !== null ? 
-                        <Grid.Column computer={4}>
-                            <Button basic onClick={this.addTag}>Add Tags </Button>   
-                        </Grid.Column>
-                    :null}
-
-                </Grid.Row>
-                
-                {this.state.chosenTags[0] !== undefined && this.state.chosenTags[0] !== null ?
-                    <Grid.Row centered className="decisionTreeEbene">
-                        {/* <div className="e1"> */}
-                            {this.state.tree.map((item,index) => {
-                                return(
-                                    // console.log(item)
-                                    <Grid.Column computer={8} >
-                                        <Button basic value={item.name} style={{marginLeft:"5%"}} className={this.generateClasses()} onClick={this.handleEbene1}>{item.name}</Button>
-                                     </Grid.Column>
+                    {this.state.chosenTags[0] !== undefined && this.state.chosenTags[0] !== null ?
+                        <Grid.Row centered className="decisionTreeEbene">
+                            {this.state.tree.map((item, index) => {
+                                return (
+                                    <Grid.Column key={index} computer={8} >
+                                        <Button basic value={item.name} style={{ marginLeft: "5%" }} className={this.generateClasses()} onClick={this.handleEbene1}>{item.name}</Button>
+                                    </Grid.Column>
                                 )
                             })}
-                        {/* </div> */}
-                </Grid.Row>
-                :
-                <Grid.Row centered className="decisionTreeEbene">
-                    {this.state.tree.map((item,index) => {
-                        return(
-                            // console.log(item)
-                            <Grid.Column computer={8} style={{marginleft:"80%"}}>
-                                <Button basic value={item.name} style={{marginLeft:"5%"}} className={this.generateClasses()} onClick={this.handleEbene1}>{item.name}</Button>
-                            </Grid.Column>
-                        )
-                    })}
-                </Grid.Row>
-                }
-                
-                <Grid.Row centered className="decisionTreeEbene">
+                        </Grid.Row>
+                        :
+                        <Grid.Row centered className="decisionTreeEbene">
+                            {this.state.tree.map((item, index) => {
+                                return (
+                                    <Grid.Column key={index} computer={8} style={{ marginleft: "80%" }}>
+                                        <Button basic value={item.name} style={{ marginLeft: "5%" }} className={this.generateClasses()} onClick={this.handleEbene1}>{item.name}</Button>
+                                    </Grid.Column>
+                                )
+                            })}
+                        </Grid.Row>
+                    }
+
+                    <Grid.Row centered className="decisionTreeEbene">
                         {this.state.Ebene2Bool === true ?
-                            this.state.Ebene2.map((item,index)=> {
-                                return(
-                                    <Grid.Column computer={4} style={{marginTop:"2%"}}>
+                            this.state.Ebene2.map((item, index) => {
+                                return (
+                                    <Grid.Column key={index} computer={4} style={{ marginTop: "2%" }}>
                                         <Button basic value={item.name} className={this.generateClasses()} onClick={this.handleEbene2}>{item.name}</Button>
-                                    </Grid.Column>                                
+                                    </Grid.Column>
                                 )
                             })
-                        :null
+                            : null
                         }
-                </Grid.Row>
-                <Grid.Row  centered className="decisionTreeEbene">
-                    {this.state.Ebene3Bool === true ?
-                        this.state.Ebene3.map((item,index)=> {
-                            return(
-                                    <Grid.Column computer={4} style={{marginTop:"2%"}} /*style={{marginleft:"5%"}}*/>
+                    </Grid.Row>
+                    <Grid.Row centered className="decisionTreeEbene">
+                        {this.state.Ebene3Bool === true ?
+                            this.state.Ebene3.map((item, index) => {
+                                return (
+                                    <Grid.Column key={index} computer={4} style={{ marginTop: "2%" }} /*style={{marginleft:"5%"}}*/>
                                         <Button basic value={item.name} className={this.generateClasses()} onClick={this.handleEbene3}>{item.name}</Button>
-                                    </Grid.Column>                             )
-                        })
-                    :null
-                    }
-                </Grid.Row>
-            </Grid>
+                                    </Grid.Column>)
+                            })
+                            : null
+                        }
+                    </Grid.Row>
+                </Grid>
             </div>
         )
     }

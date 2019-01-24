@@ -83,8 +83,9 @@
     text-align: center;
     margin-top:auto;
     margin-bottom: auto;
-    width: 50vw;
-    min-height: 0vh;
+    width: auto;
+    min-height: 0vh; 
+    /* visibility: hidden */
 }
 
   .ui.white.tag.label.setLabel{
