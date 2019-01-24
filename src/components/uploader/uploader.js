@@ -27,7 +27,7 @@ class Uploader extends Component{
     render(){
         return(
             <div className="dropZoneBorder">
-                <Icon name="add square" size="huge" /> 
+               {/* <Icon name="add square" size="huge" /> */}
                 <Dropzone onDrop={this.onDrop}>
                     {({getRootProps, getInputProps, isDragActive}) => {
                     return (
@@ -39,7 +39,7 @@ class Uploader extends Component{
                         {
                             isDragActive ?
                             <p>Drop files here...</p> :
-                            <p>Try dropping some files here, or click to select files to upload.</p>
+                            <p>Drop some files here or click to browse files.</p>
                         }
                         </div>
                     )
