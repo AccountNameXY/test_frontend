@@ -105,9 +105,7 @@ class ImagePreview extends Component {
                                         <div className="wrapper">
                                             <Segment secondary>
                                                 <a className="prev" onClick={this.scroll.bind(null, -1)}>&#10094;</a>
-
                                                 <div className="image-container">
-
                                                     {this.props.data.map((item, index) => {
                                                         return (
                                                             <div key={index} className="image">
@@ -116,9 +114,7 @@ class ImagePreview extends Component {
                                                             // <div className="innerContainer" ><img className="imagePreview" /* src={item.url} */ src={item.url} onClick={() => this.imageSelected(index)}/></div>
                                                         )
                                                     })}
-
                                                 </div>
-
                                                 <a className="next" onClick={this.scroll.bind(null, 1)}>&#10095;</a>
                                             </Segment>
                                         </div>
