@@ -1,14 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:200,400,900');
+
+
 .dropZoneBorder{
-    width: 25vw;
-    height: 150px; 
-    padding-top: 30px;
+    width: 30vw;
+    height: 200px; 
     border-radius: 25px; 
     border-style: solid;
     border-width: 3px; 
-    border-color: #001F52
+    border-color: #001F52;
 }
 
+/*
+.add.square.huge.icon{
+    color: #001F52;
+}*/
+
 .dropzone{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 194px;
     margin-top: auto;
-    margin-bottom: auto
+    margin-bottom: auto;
+    font-size: 1.44em;
+    font-weight: 200;
+    font-family: 'Nunito', sans-serif;
+    transition: all 0.2s ease;
+    color: #001F52;
+}
+
+.dropzone:focus{
+    transition: all 0.2s ease;
+    color: #001F52;
+    font-weight: 200;
+    transform: scale(1);
+}
+
+.dropzone:hover{
+    transition: all 0.2s ease;
+    color: #001F52;
+    font-weight: 200;
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+.dropzone:active{
+    transition: all 0.2s ease;
+    font-weight: 400; 
+    color: #F49E26;
+    transform: scale(1);
 }
