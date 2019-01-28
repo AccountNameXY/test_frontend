@@ -37,6 +37,7 @@ class ImagePreview extends Component {
     openTaghandler() {
         this.props.openTagHandler()
     }
+
     generateClassName() {
         let classNames = []
         classNames.push("chosenBigPicture")
@@ -103,7 +104,7 @@ class ImagePreview extends Component {
                                     <div className="main">
                                         <div className="wrapper">
                                             <Segment secondary>
-                                                <a href="#foo" className="prev" onClick={this.scroll.bind(null, -1)}>&#10094;</a>
+                                                <a className="prev" onClick={this.scroll.bind(null, -1)}>&#10094;</a>
 
                                                 <div className="image-container">
 
@@ -118,7 +119,7 @@ class ImagePreview extends Component {
 
                                                 </div>
 
-                                                <a href="#foo" className="next" onClick={this.scroll.bind(null, 1)}>&#10095;</a>
+                                                <a className="next" onClick={this.scroll.bind(null, 1)}>&#10095;</a>
                                             </Segment>
                                         </div>
                                     </div>

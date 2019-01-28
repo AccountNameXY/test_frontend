@@ -25,10 +25,12 @@ class App extends React.Component {
     this.props = props;
     this.state = {
       showTagHanler: false,
-      selected: 0
+      selected: 0,
+      data: []
     }
     this.config = config
     this.handleTagging = this.handleTagging.bind(this)
+    this.handleUpload = this.handleUpload.bind(this)
     this.handleImageChange = this.handleImageChange.bind(this)
     this.imageSelected = this.imageSelected.bind(this)
     this.deleteTags = this.deleteTags.bind(this)
@@ -44,6 +46,8 @@ class App extends React.Component {
 
 
   async handleImageChange(input) {
+    let prevData = [... this.state.data]
+    this.delteFolder(prevData)
     let data = []
     input.map((item, index) => {
       let newObject = {}
@@ -69,6 +73,28 @@ class App extends React.Component {
       showTagHandler: false
     })
 
+    this.handleUpload()
+
+  }
+
+  delteFolder(prevData) {
+
+    let fileNamesArray = []
+    prevData = (prevData.map((item, index) => {
+      return item.file.name
+    }))
+    let data = []
+    prevData.forEach((element) => {
+      data.push(element)
+    })
+
+    fetch("http://localhost:8081/delete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
   }
 
   async addTag(pictureIndex, value1, value2) {
@@ -103,14 +129,15 @@ class App extends React.Component {
   }
 
 
-  async handleTagging() {
+  async handleUpload() {
     let data = [...this.state.data]
     let dataToMap = [...this.state.data]
     dataToMap.map((item, index) => {
       let fd = new FormData()
       fd.append("image", item.file)
-      fetch("http://localhost:8081/classify", {
+      fetch("http://localhost:8081/upload", {
         method: "POST",
+
         body: fd
       })
         .then(function (response) {
@@ -119,17 +146,58 @@ class App extends React.Component {
           }
           return response.json();
         })
-        .then(function (response) {
-          data[index].tags = response.tags
-        }).then(() => {
-          this.setState({
-            data: data
-          })
-        })
+      // .then(function (response) {
+      //   data[index].tags = response.tags
+      // }).then(() => {
+      //   this.setState({
+      //     data: data
+      //   })
+      // })
     });
     this.setState({
       bigPicture: data[0]
     })
+  }
+
+  async handleTagging() {
+    let fileData = [...this.state.data]
+    let stateData = [... this.state.data]
+    fileData = (fileData.map((item, index) => {
+      return item.file.name
+    }))
+    let dataToMap = []
+    fileData.forEach((element) => {
+      dataToMap.push(element)
+    })
+
+    dataToMap.map((item, index) => {
+
+
+      fetch("http://localhost:8081/classify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item)
+      })
+        .then(function (response) {
+          if (!response.ok) {
+            return Promise.reject('some reason');
+          }
+          return response.json();
+        })
+        .then(function (response) {
+          stateData[index].tags = response.tags
+        })
+        .then(() => {
+          this.setState({
+            data: stateData,
+            bigPicture: stateData[0]
+          })
+        })
+    })
+
+    // this.senm st
   }
 
   async imageSelected(selectedIndex) {
@@ -221,7 +289,7 @@ class App extends React.Component {
         <Grid.Row centered>
           <Uploader handleImageChange={this.handleImageChange} />
         </Grid.Row>
-        {this.hasData(this.state.data) ?
+        {this.state.data.length !== 0 ?
           <Grid.Row centered>
             <ButtonSemanticUI basic className="mainButton" onClick={this.handleTagging}>Tag your Images</ButtonSemanticUI>
             <ButtonSemanticUI className="mainButton" basic onClick={this.openTagHandler}>Tag Images Manually</ButtonSemanticUI>
@@ -231,10 +299,12 @@ class App extends React.Component {
           null
         }
         <Grid.Row centered>
-          {this.state.data &&
+          {this.state.data.length !== 0 ?
             <ImagePreview data={data} showTagHandler={showTagHandler} openTagHandler={this.openTagHandler} imageSelected={this.imageSelected} deleteTags={this.deleteTags} bigPicture={bigPicture}>
               <TagHandler bigPicture={bigPicture} addTag={this.addTag} addTagAll={this.addTagAll} addTagsDecisionTree={this.addTagsDecisionTree} />
-            </ImagePreview>}
+            </ImagePreview>
+            : null
+          }
         </Grid.Row>
       </Grid>
     )

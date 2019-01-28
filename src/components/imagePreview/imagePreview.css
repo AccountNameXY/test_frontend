@@ -85,6 +85,7 @@
     margin-bottom: auto;
     width: auto;
     min-height: 0vh; 
+    max-width: 100%
     /* visibility: hidden */
 }
 
