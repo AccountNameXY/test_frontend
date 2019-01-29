@@ -25,22 +25,22 @@ class Uploader extends Component {
     render() {
         return (
             <div className="dropZoneBorder">
-               {/* <Icon name="add square" size="huge" /> */}
+                {/* <Icon name="add square" size="huge" /> */}
                 <Dropzone onDrop={this.onDrop}>
-                    {({getRootProps, getInputProps, isDragActive}) => {
-                    return (
-                        <div
-                        {...getRootProps()}
-                        className={classNames('dropzone', {'dropzone--isActive': isDragActive})}
-                        >
-                        <input {...getInputProps()} />
-                        {
-                            isDragActive ?
-                            <p>Drop files here...</p> :
-                            <p>Drop some files here or click to browse files.</p>
-                        }
-                        </div>
-                    )
+                    {({ getRootProps, getInputProps, isDragActive }) => {
+                        return (
+                            <div
+                                {...getRootProps()}
+                                className={classNames('dropzone', { 'dropzone--isActive': isDragActive })}
+                            >
+                                <input className="dropZoneInput" {...getInputProps()} />
+                                {
+                                    isDragActive ?
+                                        <p>Drop files here...</p> :
+                                        <p>Drop some files here or click to browse files.</p>
+                                }
+                            </div>
+                        )
                     }}
                 </Dropzone>
             </div>

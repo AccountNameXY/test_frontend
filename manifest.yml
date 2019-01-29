@@ -1,0 +1,4 @@
+applications:
+- name: LufthansaVRFrontend
+  host: lh-tud-bilderkennung-njs
+  memory: 128M

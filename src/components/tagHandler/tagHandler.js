@@ -146,7 +146,9 @@ class TagHandler extends Component {
                         <Header>...Or use our decision tree</Header>
                     </Grid.Row>
                     <Grid.Row>
-                        <DecisionTree addTag={this.addTagsDecisionTree} pictureId={this.props.bigPicture.pictureIndex} />
+                        <Grid.Column>
+                            <DecisionTree addTag={this.addTagsDecisionTree} pictureId={this.props.bigPicture.pictureIndex} />
+                        </Grid.Column>
                     </Grid.Row>
                 </Grid>
             </div>

@@ -88,7 +88,7 @@ class App extends React.Component {
       data.push(element)
     })
 
-    fetch("http://localhost:8081/delete", {
+    fetch(config.url + "/delete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -135,7 +135,7 @@ class App extends React.Component {
     dataToMap.map((item, index) => {
       let fd = new FormData()
       fd.append("image", item.file)
-      fetch("http://localhost:8081/upload", {
+      fetch(config.url + "/upload", {
         method: "POST",
 
         body: fd
@@ -173,7 +173,7 @@ class App extends React.Component {
     dataToMap.map((item, index) => {
 
 
-      fetch("http://localhost:8081/classify", {
+      fetch(config.url + "/classify", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -252,7 +252,7 @@ class App extends React.Component {
       })
     })
 
-    fetch("http://localhost:8081/tag", {
+    fetch(config.url + "/tag", {
       // mode: 'no-cors',
       method: "POST",
       headers: {
@@ -264,9 +264,10 @@ class App extends React.Component {
         return response.json()
       }
     }).then(function (response) {
-      window.location = "http://localhost:8081/download/" + response.filename
+      window.location = config.url + "/download/" + response.filename
     })
   }
+
 
   openTagHandler() {
     this.setState({

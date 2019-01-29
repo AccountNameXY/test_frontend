@@ -59,7 +59,7 @@ class ImagePreview extends Component {
     render() {
         return (
             <Grid style={{ width: "80v" }}>
-                <Grid.Row centered>
+                <Grid.Row stretched centered>
                     <Grid.Column computer={this.props.showTagHandler ? 7 : 16} style={{ marginLeft: "0px" }}>
                         <Segment>
 

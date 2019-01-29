@@ -34,6 +34,7 @@
     color: #001F52;
     font-weight: 200;
     transform: scale(1);
+    outline: none !important;
 }
 
 .dropzone:hover{

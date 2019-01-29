@@ -84,55 +84,55 @@ class DecisionTree extends Component {
 
     render() {
         return (
-            <div>
-                <Grid>
-                    {this.state.chosenTags[0] !== undefined && this.state.chosenTags[0] !== null ?
-                        <Grid.Row centered className="decisionTreeEbene">
-                            {this.state.tree.map((item, index) => {
-                                return (
-                                    <Grid.Column key={index} computer={8} >
-                                        <Button basic value={item.name} style={{ marginLeft: "5%" }} className={this.generateClasses()} onClick={this.handleEbene1}>{item.name}</Button>
-                                    </Grid.Column>
-                                )
-                            })}
-                        </Grid.Row>
-                        :
-                        <Grid.Row centered className="decisionTreeEbene">
-                            {this.state.tree.map((item, index) => {
-                                return (
-                                    <Grid.Column key={index} computer={8} style={{ marginleft: "80%" }}>
-                                        <Button basic value={item.name} style={{ marginLeft: "5%" }} className={this.generateClasses()} onClick={this.handleEbene1}>{item.name}</Button>
-                                    </Grid.Column>
-                                )
-                            })}
-                        </Grid.Row>
-                    }
+            // <div>
+            <Grid>
+                {this.state.chosenTags[0] !== undefined && this.state.chosenTags[0] !== null ?
+                    <Grid.Row className="decisionTreeEbene">
+                        {this.state.tree.map((item, index) => {
+                            return (
+                                <Grid.Column key={index} computer={8} >
+                                    <Button basic value={item.name} className={this.generateClasses()} onClick={this.handleEbene1}>{item.name}</Button>
+                                </Grid.Column>
+                            )
+                        })}
+                    </Grid.Row>
+                    :
+                    <Grid.Row className="decisionTreeEbene">
+                        {this.state.tree.map((item, index) => {
+                            return (
+                                <Grid.Column key={index} computer={8} tablet={8} style={{ marginleft: "80%" }}>
+                                    <Button basic value={item.name} className={this.generateClasses()} onClick={this.handleEbene1}>{item.name}</Button>
+                                </Grid.Column>
+                            )
+                        })}
+                    </Grid.Row>
+                }
 
-                    <Grid.Row centered className="decisionTreeEbene">
-                        {this.state.Ebene2Bool === true ?
-                            this.state.Ebene2.map((item, index) => {
-                                return (
-                                    <Grid.Column key={index} computer={4} style={{ marginTop: "2%" }}>
-                                        <Button basic value={item.name} className={this.generateClasses()} onClick={this.handleEbene2}>{item.name}</Button>
-                                    </Grid.Column>
-                                )
-                            })
-                            : null
-                        }
-                    </Grid.Row>
-                    <Grid.Row centered className="decisionTreeEbene">
-                        {this.state.Ebene3Bool === true ?
-                            this.state.Ebene3.map((item, index) => {
-                                return (
-                                    <Grid.Column key={index} computer={4} style={{ marginTop: "2%" }} /*style={{marginleft:"5%"}}*/>
-                                        <Button basic value={item.name} className={this.generateClasses()} onClick={this.handleEbene3}>{item.name}</Button>
-                                    </Grid.Column>)
-                            })
-                            : null
-                        }
-                    </Grid.Row>
-                </Grid>
-            </div>
+                <Grid.Row className="decisionTreeEbene">
+                    {this.state.Ebene2Bool === true ?
+                        this.state.Ebene2.map((item, index) => {
+                            return (
+                                <Grid.Column key={index} computer={4} tablet={8} style={{ marginTop: "2%" }}>
+                                    <Button basic value={item.name} className={this.generateClasses()} onClick={this.handleEbene2}>{item.name}</Button>
+                                </Grid.Column>
+                            )
+                        })
+                        : null
+                    }
+                </Grid.Row>
+                <Grid.Row className="decisionTreeEbene">
+                    {this.state.Ebene3Bool === true ?
+                        this.state.Ebene3.map((item, index) => {
+                            return (
+                                <Grid.Column key={index} computer={4} tablet={8} style={{ marginTop: "2%" }} /*style={{marginleft:"5%"}}*/>
+                                    <Button basic value={item.name} className={this.generateClasses()} onClick={this.handleEbene3}>{item.name}</Button>
+                                </Grid.Column>)
+                        })
+                        : null
+                    }
+                </Grid.Row>
+            </Grid>
+            // </div>
         )
     }
 }

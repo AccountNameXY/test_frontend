@@ -96,6 +96,7 @@
   .chosenBigPicture{
       margin-right: auto;
       margin-left: auto;
+
       max-height: 40vh;
   } 
 
@@ -103,13 +104,10 @@
     margin-right: 0px;
     margin-left: auto;
     max-height: 20vh;
-    /* max-width: 25vw; */
-
 } 
 
   .main {
     text-align: center;
-    /* height: 100vh; */
     display: flex;
     width:35vw;
     margin-left:auto;
