@@ -56,7 +56,8 @@ config.decisionTree = [
     }
 ]
 
-config.url = "https://lh-tud-bilderkennung-py.eu-de.mybluemix.net/"
+config.url = "https://lh-tud-bilderkennung-py.eu-de.mybluemix.net"
+// config.url = "http://localhost:8082"
 
 
 config.header = {

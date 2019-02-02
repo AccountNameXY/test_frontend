@@ -38,8 +38,8 @@ class App extends React.Component {
     this.addTag = this.addTag.bind(this)
     this.addTagAll = this.addTagAll.bind(this)
     this.sendTags = this.sendTags.bind(this)
+    console.log(config.url)
   }
-
   onSelect = key => {
     this.setState({ selected: key });
   }
@@ -90,6 +90,7 @@ class App extends React.Component {
 
     fetch(config.url + "/delete", {
       method: "POST",
+      // mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
@@ -137,7 +138,7 @@ class App extends React.Component {
       fd.append("image", item.file)
       fetch(config.url + "/upload", {
         method: "POST",
-
+        // mode: "cors",
         body: fd
       })
         .then(function (response) {
@@ -175,6 +176,7 @@ class App extends React.Component {
 
       fetch(config.url + "/classify", {
         method: "POST",
+        // mode: "cors",
         headers: {
           "Content-Type": "application/json",
         },
@@ -192,9 +194,11 @@ class App extends React.Component {
         .then(() => {
           this.setState({
             data: stateData,
-            bigPicture: stateData[0]
           })
         })
+      this.setState({
+        bigPicture: stateData[0]
+      })
     })
 
     // this.senm st
@@ -255,12 +259,14 @@ class App extends React.Component {
     fetch(config.url + "/tag", {
       // mode: 'no-cors',
       method: "POST",
+      // mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data)
     }).then(function (response) {
       if (response.ok) {
+        console.log(response)
         return response.json()
       }
     }).then(function (response) {

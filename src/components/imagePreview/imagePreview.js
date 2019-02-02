@@ -61,7 +61,7 @@ class ImagePreview extends Component {
             <Grid style={{ width: "80v" }}>
                 <Grid.Row stretched centered>
                     <Grid.Column computer={this.props.showTagHandler ? 7 : 16} style={{ marginLeft: "0px" }}>
-                        <Segment>
+                        <Segment className="LeftSegment">
 
                             {this.props.bigPicture !== undefined ?
                                 <div className={this.generateClassNameBigPic()}>
@@ -127,7 +127,7 @@ class ImagePreview extends Component {
                     </Grid.Column>
 
                     {this.props.showTagHandler ?
-                        <Grid.Column computer={7}>
+                        <Grid.Column className="rightSegement" computer={7}>
                             <Segment>
                                 {this.props.children}
                             </Segment>
