@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon } from "semantic-ui-react"
+import { Icon, Grid } from "semantic-ui-react"
 import "./uploader.css"
 import classNames from 'classnames'
 import Dropzone from 'react-dropzone'
@@ -24,26 +24,29 @@ class Uploader extends Component {
 
     render() {
         return (
-            <div className="dropZoneBorder">
-                {/* <Icon name="add square" size="huge" /> */}
-                <Dropzone onDrop={this.onDrop}>
-                    {({ getRootProps, getInputProps, isDragActive }) => {
-                        return (
-                            <div
-                                {...getRootProps()}
-                                className={classNames('dropzone', { 'dropzone--isActive': isDragActive })}
-                            >
-                                <input className="dropZoneInput" {...getInputProps()} />
-                                {
-                                    isDragActive ?
-                                        <p>Drop files here...</p> :
-                                        <p>Drop some files here or click to browse files.</p>
-                                }
-                            </div>
-                        )
-                    }}
-                </Dropzone>
-            </div>
+
+            <Grid.Column > {/* <Icon name="add square" size="huge" /> */}
+                <div className="dropZoneBorder">
+                    <Dropzone onDrop={this.onDrop}>
+                        {({ getRootProps, getInputProps, isDragActive }) => {
+                            return (
+                                <div
+                                    {...getRootProps()}
+                                    className={classNames('dropzone', { 'dropzone--isActive': isDragActive })}
+                                >
+                                    <input className="dropZoneInput" {...getInputProps()} />
+                                    {
+                                        isDragActive ?
+                                            <p>Drop files here...</p> :
+                                            <p>Drop some files here or click to browse files.</p>
+                                    }
+                                </div>
+                            )
+                        }}
+                    </Dropzone>
+                </div>
+            </Grid.Column>
+
         )
     }
 }

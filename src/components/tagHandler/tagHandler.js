@@ -99,7 +99,7 @@ class TagHandler extends Component {
                                 this.state.stagedTags.map((item, index) => {
                                     return (
                                         <Grid.Column key={index} computer={4} style={{ marginTop: "15px", marginRight: "15px" }}>
-                                            <Label as='a' color='red' tag>
+                                            <Label as='a' basic pointing={"left"}>
                                                 {item}
                                                 <Icon name='delete' onClick={() => this.deleteTags(index, "reg")} />
                                             </Label>
@@ -113,7 +113,7 @@ class TagHandler extends Component {
                                 this.state.stagedTagsDec.map((item, index) => {
                                     return (
                                         <Grid.Column key={index} computer={4} style={{ marginTop: "15px", marginRight: "15px" }}>
-                                            <Label as='a' color='red' tag>
+                                            <Label as='a' basic pointing={"left"}>
                                                 {item}
                                                 <Icon name='delete' onClick={() => this.deleteTags(index, "dec")} />
                                             </Label>
@@ -128,17 +128,17 @@ class TagHandler extends Component {
                         {(this.state.stagedTagsDec.length !== 0 && this.state.stagedTagsDec !== null) || (this.state.stagedTags.length !== 0 && this.state.stagedTags !== null) ?
                             // <Grid.Row centered>
                             <div>
-                                <Button basic onClick={() => this.addTag(this.props.bigPicture.pictureIndex)} style={{ display: "block", width: "95%", marginTop: "3%" }}>Add Staged Tags To Big Picture</Button>
-                                <Button basic onClick={() => this.addTagAll(this.props.bigPicture.pictureIndex)} style={{ display: "block", width: "95%", marginTop: "3%" }}>Add Staged Tags To All Pictures</Button>
-                                <Button basic onClick={this.clearAll} style={{ display: "block", width: "95%", marginTop: "3%" }}> Clear all Tags</Button>
+                                <Button basic onClick={() => this.addTag(this.props.bigPicture.pictureIndex)} style={{ display: "block", width: "95%", marginTop: "3%" }}>Add Tags To Selected Picture</Button>
+                                <Button basic onClick={() => this.addTagAll(this.props.bigPicture.pictureIndex)} style={{ display: "block", width: "95%", marginTop: "3%" }}>Add Tags To All Pictures</Button>
+                                <Button basic onClick={this.clearAll} style={{ display: "block", width: "95%", marginTop: "3%" }}>Clear All Tags</Button>
                             </div>
                             // </Gri    d.Row>
                             : null
                         }
                     </Segment>
                     <Grid.Row style={{ marginTop: "2%" }}>
-                        <Input value={this.state.value} onChange={this.handleChange} onKeyDown={this.keyPress} placeholder='Search...' style={{ marginRight: "5%" }} />
-                        <Button basic onClick={this.addTagStagingArea}>Add Tag to staging Area </Button >
+                        <Input value={this.state.value} onChange={this.handleChange} onKeyDown={this.keyPress} placeholder='Create your own Tag...' style={{ marginRight: "5%" }} />
+                        <Button basic onClick={this.addTagStagingArea}>Add Tag To Staging Area </Button >
                     </Grid.Row>
                     <Grid.Row style={{ marginTop: "2%" }}>
                     </Grid.Row>

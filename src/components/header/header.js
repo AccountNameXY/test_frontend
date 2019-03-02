@@ -16,8 +16,8 @@ class Header extends Component {
     render() {
         return (
             <div className="mainHeader">
-                <Grid.Row style={{ marginLeft: "0", marginRight: "0", height: "6.5em" }}>
-                    <Grid.Column computer={8} style={{ marginLeft: "0", marginRight: "auto" }}>
+                <Grid.Row style={{ /*marginLeft: "0", marginRight: "0",*/ height: "6.5vw" }}>
+                    <Grid.Column computer={8} mobile={16} style={{ marginLeft: "0", marginRight: "auto" }}>
                         <p className="titleMedialounge">{config.header.titleMedialounge}</p>
 
                     </Grid.Column>

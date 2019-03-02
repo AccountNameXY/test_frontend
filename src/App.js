@@ -14,8 +14,9 @@ import Uploader from "./components/uploader/uploader"
 import Header from "./components/header/header"
 import TagHandler from "./components/tagHandler/tagHandler"
 
-//UI
-// import Button from "./components/ui/button/button"
+//BackendConnector
+import BackendConnector from "./backendConnector/backendConnector"
+const backendConnector = new BackendConnector
 
 
 class App extends React.Component {
@@ -28,6 +29,7 @@ class App extends React.Component {
       selected: 0,
       data: []
     }
+    this.backendConnector = backendConnector
     this.config = config
     this.handleTagging = this.handleTagging.bind(this)
     this.handleUpload = this.handleUpload.bind(this)
@@ -38,17 +40,18 @@ class App extends React.Component {
     this.addTag = this.addTag.bind(this)
     this.addTagAll = this.addTagAll.bind(this)
     this.sendTags = this.sendTags.bind(this)
-    console.log(config.url)
   }
+
   onSelect = key => {
     this.setState({ selected: key });
   }
 
-
+  //When Pictures are Selected by the User and shown in preview
   async handleImageChange(input) {
     let prevData = [... this.state.data]
     this.delteFolder(prevData)
     let data = []
+    //set properties for the picture (URL, file, empty Tags )
     input.map((item, index) => {
       let newObject = {}
       newObject.url = URL.createObjectURL(item)
@@ -57,19 +60,9 @@ class App extends React.Component {
       newObject.pictureIndex = index
       data.push(newObject)
     })
-    let bigPicture
-    data.map((item, index) => {
-      if (index === 0) {
-        data[index].selected = true
-        bigPicture = data[index]
-      } else {
-        data[index].selected = false
-      }
-    })
 
     await this.setState({
       data: data,
-      bigPicture: bigPicture,
       showTagHandler: false
     })
 
@@ -77,8 +70,8 @@ class App extends React.Component {
 
   }
 
+  //delete previously uploaded Pictures
   delteFolder(prevData) {
-
     let fileNamesArray = []
     prevData = (prevData.map((item, index) => {
       return item.file.name
@@ -88,16 +81,10 @@ class App extends React.Component {
       data.push(element)
     })
 
-    fetch(config.url + "/delete", {
-      method: "POST",
-      // mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    this.backendConnector.deleteOnReupload(data)
   }
 
+  //addds staged Tags to selected Picture
   async addTag(pictureIndex, value1, value2) {
 
     this.setState((pState => {
@@ -112,9 +99,10 @@ class App extends React.Component {
     }))
   }
 
+  //Adds staged Tags to all Pictures uploaded
   async addTagAll(value1, value2) {
     let data = [...this.state.data]
-    // data = Object.values(data)
+
     data.map((dataItem, dataIndex) => {
       value1.map((item1, index1) => {
         data[dataIndex].tags.push(item1)
@@ -129,37 +117,18 @@ class App extends React.Component {
     })
   }
 
-
+  //Handle Upload to Backend 
   async handleUpload() {
     let data = [...this.state.data]
     let dataToMap = [...this.state.data]
-    dataToMap.map((item, index) => {
-      let fd = new FormData()
-      fd.append("image", item.file)
-      fetch(config.url + "/upload", {
-        method: "POST",
-        // mode: "cors",
-        body: fd
-      })
-        .then(function (response) {
-          if (!response.ok) {
-            return Promise.reject('some reason');
-          }
-          return response.json();
-        })
-      // .then(function (response) {
-      //   data[index].tags = response.tags
-      // }).then(() => {
-      //   this.setState({
-      //     data: data
-      //   })
-      // })
-    });
+    this.backendConnector.handleUpload(dataToMap)
+
     this.setState({
       bigPicture: data[0]
     })
   }
 
+  //Request Tags from Backend and write them in state.data.tags of each picture 
   async handleTagging() {
     let fileData = [...this.state.data]
     let stateData = [... this.state.data]
@@ -171,57 +140,26 @@ class App extends React.Component {
       dataToMap.push(element)
     })
 
-    dataToMap.map((item, index) => {
+    let data = this.backendConnector.handleTagging(dataToMap, stateData)
+
+    await this.setState({ data: data })
 
 
-      fetch(config.url + "/classify", {
-        method: "POST",
-        // mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(item)
-      })
-        .then(function (response) {
-          if (!response.ok) {
-            return Promise.reject('some reason');
-          }
-          return response.json();
-        })
-        .then(function (response) {
-          stateData[index].tags = response.tags
-        })
-        .then(() => {
-          this.setState({
-            data: stateData,
-          })
-        })
-      this.setState({
-        bigPicture: stateData[0]
-      })
-    })
 
-    // this.senm st
   }
 
+  //If Pictures is clicked it is set by BigPicture
   async imageSelected(selectedIndex) {
     let data = [...this.state.data]
-    let bigPicture
-    data.map((item, index) => {
-      if (selectedIndex === index) {
-        item.selected = true
-        bigPicture = data[index]
-      } else {
-        data[index].selected = false
-      }
-    })
+
     await this.setState({
       data: data,
-      bigPicture: bigPicture,
-      showAddSectionBool: false
+      bigPicture: data[selectedIndex],
+      // showAddSectionBool: false
     })
   }
 
+  //deletes an Tag from the recieved tags 
   async deleteTags(pictureIndex, tagIndex) {
     let data = [...this.state.data]
     data[pictureIndex].tags.map((item, index) => {
@@ -235,14 +173,10 @@ class App extends React.Component {
     })
   }
 
-  async showAddSection(pictureIndex) {
-    await this.setState({
-      showAddSectionBool: true
-    })
-  }
 
+
+  //Send tags to backend to write Tags into Pictures and recieve .Zip
   sendTags(event) {
-
     event.preventDefault()
     let data = []
     this.state.data.map((item, index) => {
@@ -255,23 +189,7 @@ class App extends React.Component {
         data[index].tags.push(tag)
       })
     })
-
-    fetch(config.url + "/tag", {
-      // mode: 'no-cors',
-      method: "POST",
-      // mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data)
-    }).then(function (response) {
-      if (response.ok) {
-        console.log(response)
-        return response.json()
-      }
-    }).then(function (response) {
-      window.location = config.url + "/download/" + response.filename
-    })
+    this.backendConnector.sendTags(data)
   }
 
 
@@ -288,6 +206,7 @@ class App extends React.Component {
 
   render() {
     const { data, showTagHandler, bigPicture } = this.state;
+    console.log(this.state.data);
     return (
       <Grid className={"App"}  >
         <Grid.Row centered>
@@ -297,7 +216,7 @@ class App extends React.Component {
           <Uploader handleImageChange={this.handleImageChange} />
         </Grid.Row>
         {this.state.data.length !== 0 ?
-          <Grid.Row centered>
+          <Grid.Row centered style={{ marginTop: "3%" }}>
             <ButtonSemanticUI basic className="mainButton" onClick={this.handleTagging}>Tag your Images</ButtonSemanticUI>
             <ButtonSemanticUI className="mainButton" basic onClick={this.openTagHandler}>Tag Images Manually</ButtonSemanticUI>
             <ButtonSemanticUI className="mainButton" basic onClick={this.sendTags}>Download Tagged Images</ButtonSemanticUI>
@@ -307,7 +226,7 @@ class App extends React.Component {
         }
         <Grid.Row centered>
           {this.state.data.length !== 0 ?
-            <ImagePreview data={data} showTagHandler={showTagHandler} openTagHandler={this.openTagHandler} imageSelected={this.imageSelected} deleteTags={this.deleteTags} bigPicture={bigPicture}>
+            <ImagePreview data={data} showTagHandler={showTagHandler} /*openTagHandler={this.openTagHandler} */ imageSelected={this.imageSelected} deleteTags={this.deleteTags} bigPicture={bigPicture}>
               <TagHandler bigPicture={bigPicture} addTag={this.addTag} addTagAll={this.addTagAll} addTagsDecisionTree={this.addTagsDecisionTree} />
             </ImagePreview>
             : null

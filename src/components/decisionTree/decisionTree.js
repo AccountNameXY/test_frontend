@@ -73,7 +73,7 @@ class DecisionTree extends Component {
     }
 
     generateClasses() {
-        return null
+        return "decTree"
     }
 
     addTag() {

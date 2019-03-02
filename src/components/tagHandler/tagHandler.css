@@ -3,3 +3,8 @@
     margin-top: 5% !important
 }
     
+
+.ui.left.pointing.basic.label{
+    background-color: #001F52;
+    color:white
+}

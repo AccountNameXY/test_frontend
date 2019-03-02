@@ -3,11 +3,11 @@
 
 .dropZoneBorder{
     width: 30vw;
-    height: 200px; 
-    border-radius: 25px; 
-    border-style: solid;
-    border-width: 3px; 
-    border-color: #001F52;
+    min-width:200px;
+    height: 194px;
+    margin-left:auto;
+    margin-right:auto
+   
 }
 
 /*
@@ -18,15 +18,20 @@
 .dropzone{
     display: flex;
     align-items: center;
-    justify-content: center;
+    text-align:center;
     height: 194px;
     margin-top: auto;
     margin-bottom: auto;
-    font-size: 1.44em;
+    font-size: calc(12px + 1.5vw);
     font-weight: 200;
     font-family: 'Nunito', sans-serif;
     transition: all 0.2s ease;
     color: #001F52;
+    border-radius: 25px; 
+    border-style: solid;
+    border-width: 3px; 
+    border-color: #001F52;
+    background: white
 }
 
 .dropzone:focus{

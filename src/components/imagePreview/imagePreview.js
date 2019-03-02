@@ -12,7 +12,7 @@ class ImagePreview extends Component {
         }
         this.imageSelected = this.imageSelected.bind(this)
         this.scroll = this.scroll.bind(this)
-        this.openTaghandler = this.openTaghandler.bind(this)
+        // this.openTaghandler = this.openTaghandler.bind(this)
     }
 
     hasData(input) {
@@ -34,9 +34,9 @@ class ImagePreview extends Component {
         $('.image-container').animate({ scrollLeft: pos }, 1000)
     }
 
-    openTaghandler() {
-        this.props.openTagHandler()
-    }
+    // openTaghandler() {
+    //     this.props.openTagHandler()
+    // }
 
     generateClassName() {
         let classNames = []
@@ -59,33 +59,28 @@ class ImagePreview extends Component {
     render() {
         return (
             <Grid style={{ width: "80v" }}>
-                <Grid.Row stretched centered>
-                    <Grid.Column computer={this.props.showTagHandler ? 7 : 16} style={{ marginLeft: "0px" }}>
+                <Grid.Row stretched centered >
+                    <Grid.Column computer={this.props.showTagHandler ? 7 : 16} mobile={16} style={{ marginLeft: "0px", marginTop: "3%" }}>
                         <Segment className="LeftSegment">
-
                             {this.props.bigPicture !== undefined ?
                                 <div className={this.generateClassNameBigPic()}>
-                                    <Grid>
+                                    <Grid style={{ marginTop: "3%" }}>
                                         <Grid.Row centered>
                                             {this.props.bigPicture.tags.length !== 0 ?
-                                                <Grid.Column computer={this.props.bigPicture.tags.length !== 0 ? 8 : 16}>
-                                                    <Grid.Row>
-                                                        <img alt="" className={this.generateClassName()} src={this.props.bigPicture.url} />
-                                                    </Grid.Row>
+                                                <Grid.Column computer={8} style={{ textAlign: "center" }}>
+                                                    < img alt="" className={this.generateClassName()} src={this.props.bigPicture.url} />
                                                 </Grid.Column>
                                                 :
-                                                <Grid.Column computer={this.props.bigPicture.tags.length !== 0 ? 8 : 16}>
-                                                    <Grid.Row centered>
-                                                        <img alt="" className={this.generateClassName()} src={this.props.bigPicture.url} />
-                                                    </Grid.Row>
+                                                <Grid.Column computer={16} style={{ textAlign: "center" }}>
+                                                    <img alt="" className={this.generateClassName()} src={this.props.bigPicture.url} />
                                                 </Grid.Column>
                                             }
                                             {this.props.bigPicture.tags[0] &&
-                                                <Grid.Column computer={8}>
+                                                <Grid.Column computer={8} >
                                                     {this.props.bigPicture.tags.map((item, tagIndex) => {
                                                         return (
                                                             <Grid.Row key={tagIndex} style={{ marginTop: "1%", marginLeft: "1px" }}>
-                                                                <Label /*className="setLabel" as='a'*/ basic /*color='white'*/ pointing={"left"}>
+                                                                <Label basic pointing={"left"}>
                                                                     {item}
                                                                     <Icon name='delete' onClick={() => this.deleteTags(tagIndex, this.props.bigPicture.pictureIndex)} />
                                                                 </Label>
@@ -99,8 +94,8 @@ class ImagePreview extends Component {
                                 :
                                 <p>Select a Picture to see Tags </p>
                             }
-                            <Grid>
-                                <Grid.Row centered>
+                            <Grid >
+                                <Grid.Row centered style={{ marginTop: "3%" }}>
                                     <div className="main">
                                         <div className="wrapper">
                                             <Segment secondary>
@@ -127,7 +122,7 @@ class ImagePreview extends Component {
                     </Grid.Column>
 
                     {this.props.showTagHandler ?
-                        <Grid.Column className="rightSegement" computer={7}>
+                        <Grid.Column className="rightSegement" computer={7} mobile={16} style={{ marginTop: "3%" }}>
                             <Segment>
                                 {this.props.children}
                             </Segment>
