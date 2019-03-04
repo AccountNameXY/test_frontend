@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Grid } from 'semantic-ui-react'
 import config from "./../../config"
+import "./cedisionTree.css"
 
 class DecisionTree extends Component {
     constructor(props) {
@@ -77,7 +78,6 @@ class DecisionTree extends Component {
     }
 
     addTag() {
-        console.log(this.props)
         this.props.addTag(this.state.chosenTags, this.props.pictureId)
     }
 

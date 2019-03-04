@@ -1,2 +1,5 @@
-
+.ui.basic.button.decTree{
+    font-size: calc(8px + .5vw);
+    padding: .78571429vw 1.5vh .78571429vw
+}
 

@@ -6,7 +6,9 @@
   margin-left:auto; 
   margin-right: auto;
   border: 2px solid #001F52;
-  background: white !important
+  background: white !important;
+  font-size: calc(8px + .5vw);
+  padding: .78571429vw 1.5vh .78571429vw
   /* width: 15vw */
 }
 

@@ -7,14 +7,40 @@ let config = require("./backend.json");
 
 class BackendConnector {
 
-    deleteOnReupload(data) {
+    deleteOnReupload(data, uploadData) {
+        console.log("HUHU")
         fetch(config.url + "/delete", {
             method: "POST",
-            // mode: "cors",
+            mode: "cors",
+
             headers: {
                 "Content-Type": "application/json",
+                "Allowed-Header": "origin"
             },
             body: JSON.stringify(data),
+        }).then(function (response) {
+            if (response.ok) {
+                uploadData.map((item, index) => {
+                    let fd = new FormData()
+                    fd.append("image", item.file)
+                    // console.log(item.file)
+                    fetch(config.url + "/upload", {
+                        method: "POST",
+                        mode: "cors",
+                        headers: {
+                            "Allowed-Header": "origin"
+                        },
+                        body: fd
+                    })
+                        .then(function (response) {
+                            if (!response.ok) {
+                                return Promise.reject('some reason');
+                            }
+                            return response.json();
+                        })
+                });
+
+            }
         })
     }
 
@@ -22,9 +48,13 @@ class BackendConnector {
         data.map((item, index) => {
             let fd = new FormData()
             fd.append("image", item.file)
+            // console.log(item.file)
             fetch(config.url + "/upload", {
                 method: "POST",
-                // mode: "cors",
+                mode: "cors",
+                headers: {
+                    "Allowed-Header": "origin"
+                },
                 body: fd
             })
                 .then(function (response) {
@@ -40,9 +70,10 @@ class BackendConnector {
         dataToMap.map((item, index) => {
             fetch(config.url + "/classify", {
                 method: "POST",
-                // mode: "cors",
+                mode: "cors",
                 headers: {
                     "Content-Type": "application/json",
+                    "Allowed-Header": "origin"
                 },
                 body: JSON.stringify(item)
             })
@@ -56,7 +87,7 @@ class BackendConnector {
                     stateData[index].tags = response.tags
                 })
         })
-        console.log(stateData);
+        // console.log(stateData);
         return stateData
     }
 
@@ -64,14 +95,15 @@ class BackendConnector {
         fetch(config.url + "/tag", {
             // mode: 'no-cors',
             method: "POST",
-            // mode: "cors",
+            mode: "cors",
             headers: {
                 "Content-Type": "application/json",
+                "Allowed-Header": "origin"
             },
             body: JSON.stringify(data)
         }).then(function (response) {
             if (response.ok) {
-                console.log(response)
+                // console.log(response)
                 return response.json()
             }
         }).then(function (response) {

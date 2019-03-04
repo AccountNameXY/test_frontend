@@ -49,7 +49,9 @@ class App extends React.Component {
   //When Pictures are Selected by the User and shown in preview
   async handleImageChange(input) {
     let prevData = [... this.state.data]
-    this.delteFolder(prevData)
+
+
+
     let data = []
     //set properties for the picture (URL, file, empty Tags )
     input.map((item, index) => {
@@ -63,15 +65,17 @@ class App extends React.Component {
 
     await this.setState({
       data: data,
-      showTagHandler: false
+      showTagHandler: false,
+      bigPicture: data[0]
     })
 
-    this.handleUpload()
+    this.deleteFolder(prevData)
+    // this.handleUpload()
 
   }
 
   //delete previously uploaded Pictures
-  delteFolder(prevData) {
+  async deleteFolder(prevData) {
     let fileNamesArray = []
     prevData = (prevData.map((item, index) => {
       return item.file.name
@@ -81,7 +85,10 @@ class App extends React.Component {
       data.push(element)
     })
 
-    this.backendConnector.deleteOnReupload(data)
+    this.backendConnector.deleteOnReupload(data, this.state.data)
+    // await this.setState({
+    //   bigPicture: data[0]
+    // })
   }
 
   //addds staged Tags to selected Picture
@@ -121,7 +128,8 @@ class App extends React.Component {
   async handleUpload() {
     let data = [...this.state.data]
     let dataToMap = [...this.state.data]
-    this.backendConnector.handleUpload(dataToMap)
+    await this.backendConnector.handleUpload(dataToMap)
+
 
     this.setState({
       bigPicture: data[0]
@@ -140,10 +148,10 @@ class App extends React.Component {
       dataToMap.push(element)
     })
 
-    let data = this.backendConnector.handleTagging(dataToMap, stateData)
+    let data = await this.backendConnector.handleTagging(dataToMap, stateData)
 
-    await this.setState({ data: data })
 
+    await this.setState({ data: data, bigPicture: data[0] })
 
 
   }
@@ -206,7 +214,7 @@ class App extends React.Component {
 
   render() {
     const { data, showTagHandler, bigPicture } = this.state;
-    console.log(this.state.data);
+    console.log(bigPicture);
     return (
       <Grid className={"App"}  >
         <Grid.Row centered>
@@ -216,10 +224,16 @@ class App extends React.Component {
           <Uploader handleImageChange={this.handleImageChange} />
         </Grid.Row>
         {this.state.data.length !== 0 ?
-          <Grid.Row centered style={{ marginTop: "3%" }}>
-            <ButtonSemanticUI basic className="mainButton" onClick={this.handleTagging}>Tag your Images</ButtonSemanticUI>
-            <ButtonSemanticUI className="mainButton" basic onClick={this.openTagHandler}>Tag Images Manually</ButtonSemanticUI>
-            <ButtonSemanticUI className="mainButton" basic onClick={this.sendTags}>Download Tagged Images</ButtonSemanticUI>
+          <Grid.Row centered >
+            <Grid.Column computer={5} style={{ textAlign: "center", marginTop: "3%" }}>
+              <ButtonSemanticUI basic className="mainButton" onClick={this.handleTagging}>Tag your Images</ButtonSemanticUI>
+            </Grid.Column>
+            <Grid.Column computer={5} style={{ textAlign: "center", marginTop: "3%" }} >
+              <ButtonSemanticUI className="mainButton" basic onClick={this.openTagHandler}>Tag Images Manually</ButtonSemanticUI>
+            </Grid.Column>
+            <Grid.Column computer={5} style={{ textAlign: "center", marginTop: "3%" }}>
+              <ButtonSemanticUI className="mainButton" basic onClick={this.sendTags}>Download Tagged Images</ButtonSemanticUI>
+            </Grid.Column>
           </Grid.Row>
           :
           null
