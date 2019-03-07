@@ -8,6 +8,10 @@ import 'semantic-ui-css/semantic.min.css'
 //config
 import config from "./config"
 
+import { css } from '@emotion/core';
+// First way to import
+import { BeatLoader } from 'react-spinners';
+
 //Components
 import ImagePreview from "./components/imagePreview/imagePreview"
 import Uploader from "./components/uploader/uploader"
@@ -18,6 +22,12 @@ import TagHandler from "./components/tagHandler/tagHandler"
 import BackendConnector from "./backendConnector/backendConnector"
 const backendConnector = new BackendConnector
 
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+`;
+
 
 class App extends React.Component {
 
@@ -26,6 +36,7 @@ class App extends React.Component {
     this.props = props;
     this.state = {
       showTagHanler: false,
+      loading: false,
       selected: 0,
       data: []
     }
@@ -136,8 +147,30 @@ class App extends React.Component {
     })
   }
 
+  checkStatus() {
+    let index = 0
+    let status = true
+    while (status || index > 10) {
+
+      index += 1
+
+      if (this.state.data[0].tags !== null || this.state.data[0].tags !== undefined) {
+        let data = [...this.state.data]
+        this.setState({
+          loading: false,
+          bigPicture: data[0]
+        })
+        status = false
+      }
+
+    }
+  }
+
   //Request Tags from Backend and write them in state.data.tags of each picture 
   async handleTagging() {
+    this.setState({ loading: true })
+    setTimeout(() => this.checkStatus(), 3000)
+
     let fileData = [...this.state.data]
     let stateData = [... this.state.data]
     fileData = (fileData.map((item, index) => {
@@ -149,10 +182,7 @@ class App extends React.Component {
     })
 
     let data = await this.backendConnector.handleTagging(dataToMap, stateData)
-
-
-    await this.setState({ data: data, bigPicture: data[0] })
-
+    this.setState({ data: data })
 
   }
 
@@ -161,9 +191,7 @@ class App extends React.Component {
     let data = [...this.state.data]
 
     await this.setState({
-      data: data,
       bigPicture: data[selectedIndex],
-      // showAddSectionBool: false
     })
   }
 
@@ -216,10 +244,29 @@ class App extends React.Component {
     const { data, showTagHandler, bigPicture } = this.state;
     console.log(bigPicture);
     return (
+
       <Grid className={"App"}  >
         <Grid.Row centered>
           <Header />
         </Grid.Row>
+        {this.state.loading &&
+          <div style={{ contentAlign: "center" }}>
+            <div className="blurrer">
+            </div>
+            {/* <div className="statusReport" > */}
+            <p className="blurrInfo">Tags Werden Analysiert</p>
+            <div className='sweet-loading'>
+              <BeatLoader
+                css={override}
+                sizeUnit={"px"}
+                size={60}
+                color={'#001F52'}
+                loading={this.state.loading}
+              />
+            </div>
+            {/* </div> */}
+          </div>
+        }
         <Grid.Row centered>
           <Uploader handleImageChange={this.handleImageChange} />
         </Grid.Row>
@@ -238,6 +285,7 @@ class App extends React.Component {
           :
           null
         }
+
         <Grid.Row centered>
           {this.state.data.length !== 0 ?
             <ImagePreview data={data} showTagHandler={showTagHandler} /*openTagHandler={this.openTagHandler} */ imageSelected={this.imageSelected} deleteTags={this.deleteTags} bigPicture={bigPicture}>

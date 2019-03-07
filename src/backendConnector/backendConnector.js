@@ -3,7 +3,7 @@ import { CLIENT_RENEG_LIMIT } from "tls";
 let request = require("request");
 let config = require("./backend.json");
 
-
+// config.url = config.localURL
 
 class BackendConnector {
 
@@ -11,11 +11,11 @@ class BackendConnector {
         console.log("HUHU")
         fetch(config.url + "/delete", {
             method: "POST",
-            mode: "cors",
+            // mode: "cors",
 
             headers: {
                 "Content-Type": "application/json",
-                "Allowed-Header": "origin"
+                // "Allowed-Header": "origin"
             },
             body: JSON.stringify(data),
         }).then(function (response) {
@@ -26,9 +26,9 @@ class BackendConnector {
                     // console.log(item.file)
                     fetch(config.url + "/upload", {
                         method: "POST",
-                        mode: "cors",
+                        // mode: "cors",
                         headers: {
-                            "Allowed-Header": "origin"
+                            // "Allowed-Header": "origin"
                         },
                         body: fd
                     })
@@ -51,9 +51,9 @@ class BackendConnector {
             // console.log(item.file)
             fetch(config.url + "/upload", {
                 method: "POST",
-                mode: "cors",
+                // mode: "cors",
                 headers: {
-                    "Allowed-Header": "origin"
+                    // "Allowed-Header": "origin"
                 },
                 body: fd
             })
@@ -70,24 +70,24 @@ class BackendConnector {
         dataToMap.map((item, index) => {
             fetch(config.url + "/classify", {
                 method: "POST",
-                mode: "cors",
+                // mode: "cors",
                 headers: {
                     "Content-Type": "application/json",
-                    "Allowed-Header": "origin"
+                    // "Allowed-Header": "origin"
                 },
                 body: JSON.stringify(item)
+            }).then(function (response) {
+                if (!response.ok) {
+                    return Promise.reject('some reason');
+                }
+                return response.json();
             })
-                .then(function (response) {
-                    if (!response.ok) {
-                        return Promise.reject('some reason');
-                    }
-                    return response.json();
-                })
                 .then(function (response) {
                     stateData[index].tags = response.tags
                 })
         })
-        // console.log(stateData);
+
+        console.log(stateData)
         return stateData
     }
 
@@ -95,10 +95,10 @@ class BackendConnector {
         fetch(config.url + "/tag", {
             // mode: 'no-cors',
             method: "POST",
-            mode: "cors",
+            // mode: "cors",
             headers: {
                 "Content-Type": "application/json",
-                "Allowed-Header": "origin"
+                // "Allowed-Header": "origin"
             },
             body: JSON.stringify(data)
         }).then(function (response) {
